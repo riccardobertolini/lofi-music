@@ -1,0 +1,13 @@
+#root,
+html {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(
+          -225deg,
+          #000 0%,
+          #44107a 55%,
+          #ff1361 66%,
+          #44107a 76%,
+          #000 100%
+  );
+}
