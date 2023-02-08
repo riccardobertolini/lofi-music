@@ -20,7 +20,7 @@ function App() {
 				/>
 				<TilePlayer imageSrc={'/img/relax.jpg'} src={'/audio/relaxing.mp3'} />
 				<TilePlayer imageSrc={'/img/cat.jpg'} src={'/audio/cat.mp3'} />
-				<TilePlayer imageSrc={'/img/spring.jpg'} src={'/audio/spring.mp3'} />
+				<TilePlayer imageSrc={'/img/rain.jpg'} src={'/audio/rain.mp3'} />
 				<TilePlayer imageSrc={'/img/sea.jpg'} src={'/audio/sea.mp3'} />
 			</TilesContainer>
 			<Footer>
