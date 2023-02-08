@@ -37,6 +37,7 @@ export const TilesContainer = styled.div`
 	flex-wrap: wrap;
 	max-width: 1000px;
 	margin: 0 auto;
+	justify-content: center;
 `;
 
 export const Footer = styled.div`
