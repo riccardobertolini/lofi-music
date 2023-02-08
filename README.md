@@ -1,11 +1,13 @@
 # Lofi-Music 🎵
 
 A React 18 project, created for fun. I was tired to open YouTube for some lofi music when working 🤭.
+
 A live demo for a quick preview, is available [👉 clicking here](https://lofi-music-eight.vercel.app/).
 
 ### Project details:
 * React 18 with useEffect and useState;
 * TypeScript
+* Vite for application management
 * Styled Components
 * Components/Layout based
 * Prettier for better readability 
