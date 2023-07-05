@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TilePlayer } from './tilePlayer.tsx';
 import { Footer, TilesContainer, Title } from './App.style';
 import './App.css';
