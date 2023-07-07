@@ -21,6 +21,15 @@ function App() {
 				<TilePlayer imageSrc={'/img/cat.jpg'} src={'/audio/cat.mp3'} />
 				<TilePlayer imageSrc={'/img/rain.jpg'} src={'/audio/rain.mp3'} />
 				<TilePlayer imageSrc={'/img/sea.jpg'} src={'/audio/sea.mp3'} />
+				<TilePlayer imageSrc={'/img/Thunder.jpg'} src={'/audio/thunder.mp3'} />
+				<TilePlayer
+					imageSrc={'/img/city.jpg'}
+					src={'/audio/relaxed-city.mp3'}
+				/>
+				<TilePlayer
+					imageSrc={'/img/zen_bells.jpg'}
+					src={'/audio/zen_bells.mp3'}
+				/>
 			</TilesContainer>
 			<Footer>
 				<a href="https://www.github.com/riccardobertolini">
