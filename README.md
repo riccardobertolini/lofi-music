@@ -2,7 +2,7 @@
 
 A React 18 project, created for fun. I was tired to open YouTube for some lofi music when working 🤭.
 
-A live demo for a quick preview, is available [👉 clicking here](https://lofi-music-eight.vercel.app/).
+A live demo for a quick preview, is available [👉 clicking here](https://www.lofimusic.dev/).
 
 ### Project details:
 * React 18 with useEffect and useState;
