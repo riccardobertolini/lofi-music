@@ -32,7 +32,7 @@ function App() {
 				/>
 			</TilesContainer>
 			<Footer>
-				<a href="https://www.github.com/riccardobertolini">
+				<a href="https://github.com/riccardobertolini/lofi-music">
 					Open Source project 💖 feel free to contribute
 				</a>{' '}
 				<br />
