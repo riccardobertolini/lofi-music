@@ -143,13 +143,7 @@ const SettingModal = () => {
 								/>
 							</svg>
 						</CloseButton>
-            <div className='aboutus'>
-						<a href="https://www.github.com/riccardobertolini">
-							👨‍💻 by Riccardo Bertolini with 💖
-						</a>{' '}
-						<br />
-						using React18, TypeScript & Vite
-            </div>
+            					<div className='aboutus'><br/>Settings coming soon!<br/></div>
 					</ModalContent>
 				</ModalWrapper>
 			)}
