@@ -39,6 +39,18 @@ const musicList = [
 		imageSrc: '/img/zen_bells.jpg',
 		src: '/audio/zen_bells.mp3',
 	},
+	{
+		imageSrc: '/img/meadow.jpg',
+		src: '/audio/meadow.mp3',
+	},
+	{
+		imageSrc: '/img/desert.jpg',
+		src: '/audio/desert.mp3',
+	},
+	{
+		imageSrc: '/img/mountain.jpg',
+		src: '/audio/mountain.mp3',
+	},
 ];
 
 const MusicTiles = () => {
