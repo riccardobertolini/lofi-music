@@ -33,7 +33,7 @@ function App() {
 			</TilesContainer>
 			<Footer>
 				<a href="https://www.github.com/riccardobertolini">
-					👨‍💻 by Riccardo Bertolini with 💖
+					Open Source project 💖 feel free to contribute
 				</a>{' '}
 				<br />
 				using React18, TypeScript & Vite
