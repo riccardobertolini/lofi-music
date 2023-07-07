@@ -1,10 +1,12 @@
 import { TilePlayer } from './tilePlayer.tsx';
 import { Footer, TilesContainer, Title } from './App.style';
+import SettingModal from './SettingModal.jsx';
 import './App.css';
 
 function App() {
 	return (
 		<div className="App">
+			<SettingModal />
 			<Title>
 				Create your working <div>sounds</div>
 			</Title>
