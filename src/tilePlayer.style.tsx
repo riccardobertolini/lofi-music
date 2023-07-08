@@ -24,11 +24,15 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 		transform: translate(-50%, -50%);
 		font-size: 70px;
 		color: white;
-		text-shadow: 1px 2px 10px azure;
+		-webkit-filter: drop-shadow(10px 10px 10px #ffffff);
+		filter: drop-shadow(10px 10px 10px #ffffff);
 		top: 50%;
 		left: 50%;
 		z-index: 1;
-		${(props) => (props.status ? 'content:"⏹"' : 'content:"▶"')};
+		${(props) =>
+			props.status
+				? 'content: url(/img/pause.svg); zoom:20%'
+				: 'content: url(/img/play.svg); zoom:20%'};
 	}
 
 	img {
