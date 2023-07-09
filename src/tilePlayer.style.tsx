@@ -28,11 +28,16 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 		filter: drop-shadow(10px 10px 10px #ffffff);
 		top: 50%;
 		left: 50%;
+
+		width: 50px;
+		height: 50px;
+		content:"";
+		background-size: cover;
 		z-index: 1;
 		${(props) =>
 			props.status
-				? 'content: url(/img/pause.svg); zoom:20%'
-				: 'content: url(/img/play.svg); zoom:20%'};
+				? 'background-image: url(/img/pause.svg);'
+				: 'background-image: url(/img/play.svg);'};
 	}
 
 	img {
