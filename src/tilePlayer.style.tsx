@@ -31,7 +31,7 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 
 		width: 50px;
 		height: 50px;
-		content:"";
+		content: '';
 		background-size: cover;
 		z-index: 1;
 		${(props) =>
@@ -74,4 +74,48 @@ export const Controls = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+`;
+export const SliderContainer = styled.div`
+	width: 90%;
+	margin: 10px auto 0 auto;
+	padding: 10px 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #f5f5f5;
+	border-radius: 5px;
+	color: #888;
+`;
+
+export const StyledSlider = styled.input`
+	width: 100%;
+	height: 5px;
+	background: linear-gradient(
+		to right,
+		#44107a ${(props) => props.value * 100}%,
+		#ff1361 ${(props) => props.value * 100}%
+	);
+	border-radius: 5px;
+	appearance: none;
+	outline: none;
+	opacity: 0.7;
+	transition: opacity 0.2s;
+	cursor: pointer;
+
+	&::-webkit-slider-thumb {
+		appearance: none;
+		width: 12px;
+		height: 12px;
+		background-color: #888;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+	&::-moz-range-thumb {
+		width: 12px;
+		height: 12px;
+		background-color: #888;
+		border-radius: 50%;
+		cursor: pointer;
+	}
 `;
