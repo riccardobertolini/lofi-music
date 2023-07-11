@@ -11,6 +11,7 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "baseUrl": "./",
     "lib": [
       "dom",
       "dom.iterable",
@@ -26,8 +27,8 @@
     "isolatedModules": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "pages/**/*.ts",
+    "components/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
