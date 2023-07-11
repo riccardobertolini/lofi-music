@@ -1,6 +1,6 @@
 import { AudioHTMLAttributes, useRef, useState } from 'react';
 import { AudioPlayer, ImageContainer, Controls } from './tilePlayer.style';
-import ReactPlayer from 'react-player';
+//import ReactPlayer from 'react-player';
 
 interface TilePlayerProps {
 	src: string;
@@ -35,8 +35,8 @@ export const TilePlayer = ({ src, imageSrc }: TilePlayerProps) => {
 		<AudioPlayer>
 			<ImageContainer status={playing} onClick={togglePlay}>
 				<img src={imageSrc} alt="" />
-				<ReactPlayer ref={audioRef} src={src} loop />
-				{/* <audio ref={audioRef} src={src} loop /> */}
+				{/*<ReactPlayer ref={audioRef} src={src} loop />*/}
+				 <audio ref={audioRef} src={src} loop />
 			</ImageContainer>
 			<Controls>
 				<span>🔊</span>
