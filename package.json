@@ -1,7 +1,7 @@
 {
-  "name": "lofi",
-  "version": "0.1.0",
+  "name": "lofi-music",
   "private": true,
+  "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +14,7 @@
     "next": "13.4.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "styled-components": "^6.0.3",
     "styled-components": "^6.0.3"
   },
   "devDependencies": {
