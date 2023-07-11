@@ -1,6 +1,6 @@
-import { Footer, Title } from "/components/App.style";
-import MusicTiles from "/components/MusicTiles";
-import SettingModal from "/components/SettingModal";
+import { Footer, Title } from "@/components/App.style";
+import MusicTiles from "@/components/MusicTiles";
+import SettingModal from "@/components/SettingModal";
 
 export default function Home() {
   return (
