@@ -1,13 +1,13 @@
 # Lofi-Music 🎵
 
-A React 18 project, created for fun. I was tired to open YouTube for some lofi music when working 🤭.
+A React 18 + NextJS project, created for fun. I was tired to open YouTube for some lofi music when working 🤭.
 
 A live demo for a quick preview, is available [👉 clicking here](https://www.lofimusic.dev/).
 
 ### Project details:
+* NextJS 13
 * React 18 with useEffect and useState;
 * TypeScript
-* Vite for application management
 * Styled Components
 * Components/Layout based
 * Prettier for better readability 
@@ -28,5 +28,3 @@ Open [http://localhost:3000](http://localhost:3000) (default port) to view it in
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-
-Author: Riccardo Bertolini
