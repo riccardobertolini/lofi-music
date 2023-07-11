@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "jsx": "preserve",
+    "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
@@ -11,26 +11,11 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "incremental": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["components/*", "pages/*"]
+    }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ]
+  "include": ["pages/**/*.ts", "components/**/*.tsx"],
+  "exclude": ["node_modules", "build"]
 }
