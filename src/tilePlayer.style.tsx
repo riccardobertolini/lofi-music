@@ -79,12 +79,13 @@ export const SliderContainer = styled.div`
 	width: 90%;
 	margin: 10px auto 0 auto;
 	padding: 10px 5px;
-	display: flex;
+	//display: flex;
 	align-items: center;
 	justify-content: center;
 	background-color: #f5f5f5;
 	border-radius: 5px;
 	color: #888;
+	display:none
 `;
 
 export const StyledSlider = styled.input.attrs({
