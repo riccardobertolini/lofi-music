@@ -6,12 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
     "next": "13.4.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.1",
+    "@types/react": "^18.2.14",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
   }
 }
