@@ -1,23 +1,36 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "jsx": "react",
-      "strict": true,
-      "esModuleInterop": true,
-      "noImplicitReturns": true,
-      "noImplicitThis": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-    },
-    "include": [
-      "src/**/*.ts",
-      "src/**/*.tsx"
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "jsx": "preserve",
+    "strict": true,
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "exclude": [
-      "node_modules",
-      "build"
-    ]
-  }
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
+}
