@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Footer, Title } from "@/components/App.style";
-import MusicTiles from "@/components/MusicTiles";
-import SettingModal from "@/components/SettingModal";
+import { Header, Footer, Title } from '@/components/App.style'
+import MusicTiles from '@/components/MusicTiles'
+import SettingModal from '@/components/SettingModal'
+import FullScreenMode from '@/components/FullScreenMode'
 import Shuffler from "@/components/Shuffler";
 
 export default function Home() {
@@ -59,20 +60,23 @@ export default function Home() {
   ];
 
   return (
-    <div>
-      <SettingModal />
-      <Shuffler setRandomTracks={setRandomTracks} totalTracks={musicList.length} />
-      <Title>
-        Create your working <div>sounds</div>
-      </Title>
-      <MusicTiles musicList={musicList} randomTracks={randomTracks} />
-      <Footer>
-        <a href="https://github.com/riccardobertolini/lofi-music">
-          Open Source project 💖 feel free to contribute
-        </a>{" "}
-        <br />
-        using React18, TypeScript & Vite
-      </Footer>
-    </div>
-  );
+      <div>
+        <Header>
+          <FullScreenMode />
+          <Shuffler setRandomTracks={setRandomTracks} totalTracks={musicList.length} />
+          <SettingModal />
+        </Header>
+        <Title>
+          Create your working <div>sounds</div>
+        </Title>
+        <MusicTiles musicList={musicList} randomTracks={randomTracks} />
+        <Footer>
+          <a href="https://github.com/riccardobertolini/lofi-music">
+            Open Source project 💖 feel free to contribute
+          </a>{' '}
+          <br />
+          using React18, TypeScript & Vite
+        </Footer>
+      </div>
+  )
 }
