@@ -28,6 +28,28 @@ export const Title = styled.h1`
   }
 `
 
+export const Subheading = styled.h3`
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  line-height: 1;
+  color: #fff;
+  width: 100%;
+
+  a {
+    font-weight: bold;
+    color: #800080;
+    display: inline-block;
+    font-size: 1em;
+    padding-top: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.5s ease;
+  }
+  a:hover {
+    color: #cc00cc;
+  }
+`
+
 export const TilesContainer = styled.div`
   font-family: 'Ubuntu', sans-serif;
 

@@ -1,50 +1,69 @@
-import React, { useRef, useState, useEffect } from 'react';
-import ReactPlayer from 'react-player';
-import { AudioPlayer, ImageContainer, Controls, SliderContainer, StyledSlider } from './tilePlayer.style';
+import React, { useRef, useState, useEffect } from 'react'
+import ReactPlayer from 'react-player'
+import {
+  AudioPlayer,
+  ImageContainer,
+  Controls,
+  SliderContainer,
+  StyledSlider,
+} from './tilePlayer.style'
 
 interface TilePlayerProps {
-  src: string;
-  imageSrc: string;
-  isPlaying: boolean;
+  src: string
+  imageSrc: string
+  incrementActiveSounds: (value: boolean) => void
+  stopAllTrigger: number
+  isPlaying: boolean
 }
 
 interface ProgressState {
-  played: number;
-  playedSeconds: number;
-  loaded: number;
-  loadedSeconds: number;
+  played: number
+  playedSeconds: number
+  loaded: number
+  loadedSeconds: number
 }
 
-export const TilePlayer = ({ src, imageSrc, isPlaying }: TilePlayerProps) => {
-  const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [progress, setProgress] = useState(0);
+export const TilePlayer = ({
+  src,
+  imageSrc,
+  incrementActiveSounds,
+  stopAllTrigger,
+  isPlaying,
+}: TilePlayerProps) => {
+  const [playing, setPlaying] = useState(false)
+  const [volume, setVolume] = useState(1)
+  const [progress, setProgress] = useState(0)
+
+  const playerRef = useRef<ReactPlayer>(null)
 
   useEffect(() => {
-    isPlaying ? setPlaying(true) : setPlaying(false);
-  }, [isPlaying]);
+    setPlaying(false)
+  }, [stopAllTrigger])
 
-  const playerRef = useRef<ReactPlayer>(null);
+  useEffect(() => {
+    isPlaying ? setPlaying(true) : setPlaying(false)
+  }, [isPlaying])
 
   const togglePlay = () => {
-    setPlaying((prevPlaying) => !prevPlaying);
-  };
+    setPlaying((prevPlaying) => !prevPlaying)
+    incrementActiveSounds(!playing)
+  }
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-  };
+    const newVolume = parseFloat(e.target.value)
+    setVolume(newVolume)
+  }
 
   const handleProgress = (state: ProgressState) => {
-    const { played } = state;
-    setProgress(played);
-  };
+    const { played } = state
+    setProgress(played)
+  }
 
   const handleSeek = (value: number) => {
     if (playerRef.current) {
-      playerRef.current.seekTo(value);
+      playerRef.current.seekTo(value)
     }
-  };
+  }
 
   return (
     <AudioPlayer>
@@ -67,7 +86,9 @@ export const TilePlayer = ({ src, imageSrc, isPlaying }: TilePlayerProps) => {
           max={1}
           step={0.01}
           value={progress}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSeek(parseFloat(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleSeek(parseFloat(e.target.value))
+          }
         />
       </SliderContainer>
       <Controls>
@@ -82,5 +103,5 @@ export const TilePlayer = ({ src, imageSrc, isPlaying }: TilePlayerProps) => {
         />
       </Controls>
     </AudioPlayer>
-  );
-};
+  )
+}
