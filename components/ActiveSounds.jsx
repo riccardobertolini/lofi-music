@@ -10,7 +10,13 @@ const ActiveSounds = ({ activeSounds, stopAll }) => {
     )
   else
     return (
-      <Subheading style={{ opacity: '0', transition: 'opacity 0.3s ease' }}>
+      <Subheading
+        style={{
+          opacity: '0',
+          transition: 'opacity 0.3s ease',
+          cursor: 'default',
+        }}
+      >
         Sounds active: {activeSounds} <br /> <a onClick={stopAll}>Stop all</a>
       </Subheading>
     )
