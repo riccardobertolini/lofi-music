@@ -11,7 +11,7 @@ import {
 interface TilePlayerProps {
   src: string
   imageSrc: string
-  incrementActiveSounds: (boolean) => void
+  incrementActiveSounds: (value: boolean) => void
   stopAllTrigger: number
 }
 

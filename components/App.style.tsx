@@ -33,14 +33,20 @@ export const Subheading = styled.h3`
   text-align: center;
   line-height: 1;
   color: #fff;
+  width: 100%;
 
   a {
-    width: 100%;
     font-weight: bold;
-    color: purple;
+    color: #800080;
     display: inline-block;
     font-size: 1em;
+    padding-top: 5px;
     text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.5s ease;
+  }
+  a:hover {
+    color: #cc00cc;
   }
 `
 
