@@ -13,7 +13,7 @@ interface TilePlayerProps {
   imageSrc: string
   incrementActiveSounds: (value: boolean) => void
   stopAllTrigger: number
-}
+  isPlaying: boolean
 
 interface ProgressState {
   played: number
@@ -22,11 +22,13 @@ interface ProgressState {
   loadedSeconds: number
 }
 
+
 export const TilePlayer = ({
   src,
   imageSrc,
   incrementActiveSounds,
   stopAllTrigger,
+  isPlaying,
 }: TilePlayerProps) => {
   const [playing, setPlaying] = useState(false)
   const [volume, setVolume] = useState(1)
@@ -37,6 +39,11 @@ export const TilePlayer = ({
   useEffect(() => {
     setPlaying(false)
   }, [stopAllTrigger])
+      
+  useEffect(() => {
+    isPlaying ? setPlaying(true) : setPlaying(false);
+  }, [isPlaying]);
+
 
   const togglePlay = () => {
     setPlaying((prevPlaying) => !prevPlaying)

@@ -62,6 +62,13 @@ export const TilesContainer = styled.div`
   justify-content: center;
 `
 
+export const Header = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+`
+
 export const Footer = styled.div`
   margin-top: 100px;
   font-family: 'Ubuntu', sans-serif;
