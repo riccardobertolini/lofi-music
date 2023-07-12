@@ -38,12 +38,12 @@ const Shuffler = ({ setRandomTracks, totalTracks }: { setRandomTracks: (value: n
     }
 
     return (
-    <Container>
-        <div className="shuffler" onClick={
-          () => setRandomTracks(getMultipleRandomTracks(Array.from(Array(totalTracks).keys()), 3))
-        } />
-    </Container >
-  );
+        <Container>
+            <div className="shuffler" onClick={
+                () => setRandomTracks(getMultipleRandomTracks(Array.from(Array(totalTracks).keys()), 3))
+            } />
+        </Container >
+    );
 };
 
 export default Shuffler;
