@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 
 import { FullscreenOutlined, FullscreenExitOutlined } from '@mui/icons-material'
 
-import IconButton from '@/components/IconButton'
+import IconButton from './IconButton'
 
-import { enterFullScreen, exitFullScreen } from '@/utils/FullScreenMode'
+import { enterFullScreen, exitFullScreen } from '../utils/FullScreenMode'
 
-import { MuiVariants } from '@/constants/colors'
+import { MuiVariants } from '../constants/colors'
 
 const FullScreenMode = () => {
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false)
