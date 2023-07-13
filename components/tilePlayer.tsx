@@ -71,7 +71,7 @@ export const TilePlayer = ({
 
   return (
     <AudioPlayer>
-      <ImageContainer status={playing} onClick={togglePlay}>
+      <ImageContainer $status={playing} onClick={togglePlay}>
         <Image width={300} height={300} src={imageSrc} alt="" />
         <ReactPlayer
           ref={playerRef}
