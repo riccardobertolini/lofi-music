@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-
 import { SettingsOutlined } from '@mui/icons-material'
-
 import IconButton from '@/components/IconButton'
-
 import { MuiVariants } from '@/constants/colors'
 
 const Container = styled.div``

@@ -1,6 +1,6 @@
 export const enterFullScreen = () => {
   const docElement = document.documentElement
-  // Stop if its already in full screen mode
+  // Stop if It's already in full screen mode
   if (docElement.fullscreenElement) {
     return null
   }
@@ -21,7 +21,7 @@ export const enterFullScreen = () => {
 }
 
 export const exitFullScreen = () => {
-  // Stop if its not in full screen mode
+  // Stop if It's not in full screen mode
   if (!document.fullscreenElement) {
     return null
   }
