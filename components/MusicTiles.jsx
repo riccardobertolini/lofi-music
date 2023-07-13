@@ -1,14 +1,13 @@
 import { useState } from 'react'
-
 import { TilesContainer } from './App.style'
 import { TilePlayer } from './tilePlayer'
 import ActiveSounds from './ActiveSounds'
 
 const MusicTiles = ({ musicList, randomTracks }) => {
-  
+
   const [activeSounds, setActiveSounds] = useState(0)
   const [stopAllTrigger, doStopAllTrigger] = useState(0)
-  
+
   const incrementActiveSounds = (playing) => {
     if (playing) {
       setActiveSounds(activeSounds + 1)
