@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { SettingsOutlined } from '@mui/icons-material'
-import IconButton from '@/components/IconButton'
-import { MuiVariants } from '@/constants/colors'
+import IconButton from './IconButton'
+import { MuiVariants } from '../constants/colors'
 
 const Container = styled.div``
 
@@ -60,24 +60,24 @@ const CloseButton = styled.span`
   }
 `
 const SettingModal = () => {
-  const ModalRef = useRef()
-  const [isOpen, setIsOpen] = useState(false)
+  const ModalRef = useRef(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const openModal = () => {
+  const openModal = (): void => {
     setIsOpen(true)
   }
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsOpen(false)
   }
 
-  const outsideClick = (e) => {
+  const outsideClick = (e: MouseEvent): void => {
     if (ModalRef.current === e.target) {
       setIsOpen(false)
     }
   }
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     document.addEventListener('mousedown', outsideClick)
     return () => {
       document.removeEventListener('mousedown', outsideClick)
