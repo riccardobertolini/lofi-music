@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import Image from 'next/image'
 import ReactPlayer from 'react-player'
 import {
   AudioPlayer,
@@ -68,7 +69,7 @@ export const TilePlayer = ({
   return (
     <AudioPlayer>
       <ImageContainer status={playing} onClick={togglePlay}>
-        <img src={imageSrc} alt="" />
+        <Image width={300} height={300} src={imageSrc} alt="" />
         <ReactPlayer
           ref={playerRef}
           url={src}
