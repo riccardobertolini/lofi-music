@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
-import ReactPlayer from 'react-player'
+import dynamic from 'next/dynamic';
 import {
   AudioPlayer,
   ImageContainer,
@@ -8,6 +8,9 @@ import {
   SliderContainer,
   StyledSlider,
 } from './tilePlayer.style'
+import { ReactPlayerProps } from "react-player";
+
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 interface TilePlayerProps {
   src: string
@@ -35,7 +38,7 @@ export const TilePlayer = ({
   const [volume, setVolume] = useState(1)
   const [progress, setProgress] = useState(0)
 
-  const playerRef = useRef<ReactPlayer>(null)
+  const playerRef = useRef<ReactPlayerProps>(null)
 
   useEffect(() => {
     setPlaying(false)
