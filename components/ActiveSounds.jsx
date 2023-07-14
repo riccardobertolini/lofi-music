@@ -1,12 +1,18 @@
 import React from 'react'
 import { Subheading } from './App.style'
 
-const ActiveSounds = ({ activeSounds, stopAll }) => {
+const ActiveSounds = ({ timer, minutes, activeSounds, stopAll }) => {
   if (activeSounds)
     return (
-      <Subheading style={{ transition: 'opacity 0.3s ease' }}>
-        Sounds active: {activeSounds} <br /> <a onClick={stopAll}>Stop all</a>
-      </Subheading>
+      <>
+        <Subheading style={{ transition: 'opacity 0.3s ease' }}>
+          <p style={{ color: '#ff1361' }}>
+            {minutes < 10 ? `0${minutes}` : minutes}:
+            {timer < 10 ? `0${timer}` : timer}
+          </p>
+          Sounds active: {activeSounds} <br /> <a onClick={stopAll}>Stop all</a>
+        </Subheading>
+      </>
     )
   else
     return (

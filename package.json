@@ -13,10 +13,15 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/utils": "^4.11.3",
     "@mui/icons-material": "^5.14.0",
+    "@mui/material": "^5.14.0",
     "next": "13.4.9",
     "path": "^0.12.7",
     "react": "18.2.0",
+    "react-datepicker": "^4.16.0",
     "react-dom": "18.2.0",
     "react-player": "^2.12.0",
     "styled-components": "^6.0.3"
