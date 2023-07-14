@@ -57,6 +57,18 @@ export default function Home() {
       imageSrc: "/img/mountain.jpg",
       src: "/audio/mountain.mp3",
     },
+    {
+      imageSrc: "/img/thunderstorm.jpg",
+      src: "/audio/thunderstorm.mp3",
+    },
+    {
+      imageSrc: "/img/bells.jpg",
+      src: "/audio/bells.mp3",
+    },
+    {
+      imageSrc: "/img/subway.jpg",
+      src: "/audio/subway.mp3",
+    },
   ];
 
   return (
