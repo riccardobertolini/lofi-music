@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface ImageContainerProps {
-	readonly status: boolean;
+	readonly $status: boolean;
 }
 
 export const AudioPlayer = styled.div`
@@ -32,10 +32,7 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 		content: '';
 		background-size: cover;
 		z-index: 1;
-		${(props) =>
-			props.status
-				? 'background-image: url(/img/pause.svg);'
-				: 'background-image: url(/img/play.svg);'};
+		background-image: url(${(props) => (props.$status ? '/img/pause.svg' : '/img/play.svg')});
 	}
 
 	img {
@@ -45,8 +42,8 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 		transition: 0.5s;
 		position: relative;
 		z-index: 0;
-		filter: ${(props) => (props.status ? 'grayscale(1)' : 'none')};
-		transform: ${(props) => (props.status ? 'scale(1.1)' : 'none')};
+		filter: ${(props) => (props.$status ? 'grayscale(1)' : 'none')};
+		transform: ${(props) => (props.$status ? 'scale(1.1)' : 'none')};
 	}
 `;
 
