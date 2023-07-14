@@ -5,7 +5,6 @@ import SettingModal from '@/components/SettingModal'
 import FullScreenMode from '@/components/FullScreenMode'
 import Shuffler from '@/components/Shuffler'
 import Datecalendar from '../components/CalendarData'
-import { Height } from '@material-ui/icons'
 
 export default function Home() {
   const [randomTracks, setRandomTracks] = useState([])
