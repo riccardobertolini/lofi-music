@@ -5,6 +5,7 @@ import SettingModal from '@/components/SettingModal'
 import FullScreenMode from '@/components/FullScreenMode'
 import Shuffler from '@/components/Shuffler'
 import Datecalendar from '../components/CalendarData'
+import PrefetchImages from '@/components/PrefetchImages'
 
 export default function Home() {
   const [randomTracks, setRandomTracks] = useState([])
@@ -74,6 +75,7 @@ export default function Home() {
 
   return (
     <div>
+      <PrefetchImages />
       <Header>
         <FullScreenMode />
         <Shuffler

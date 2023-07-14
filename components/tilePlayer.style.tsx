@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const PAUSE_IMAGE = '/img/pause.svg';
+
 interface ImageContainerProps {
 	readonly $status: boolean;
 }
@@ -32,7 +34,7 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 		content: '';
 		background-size: cover;
 		z-index: 1;
-		background-image: url(${(props) => (props.$status ? '/img/pause.svg' : '/img/play.svg')});
+		background-image: url(${(props) => (props.$status ? PAUSE_IMAGE : '/img/play.svg')});
 	}
 
 	img {
