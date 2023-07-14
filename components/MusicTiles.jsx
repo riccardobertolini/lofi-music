@@ -44,6 +44,8 @@ const MusicTiles = ({ musicList, randomTracks }) => {
   const stopAll = () => {
     doStopAllTrigger((prevStopAllTrigger) => prevStopAllTrigger + 1)
     setActiveSounds(0)
+    setMinutes(0)
+    setTimer(0)
   }
   if (timer == 60) {
     setMinutes(minutes + 1)
