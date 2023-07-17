@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const PAUSE_IMAGE = '/img/pause.svg';
+export const VOLUME_IMAGE = '/img/volume.svg';
 
 interface ImageContainerProps {
 	readonly $status: boolean;
@@ -10,6 +11,7 @@ export const AudioPlayer = styled.div`
 	width: 300px;
 	height: 380px;
 `;
+
 export const ImageContainer = styled.div<ImageContainerProps>`
 	width: 300px;
 	height: 300px;
@@ -57,6 +59,7 @@ export const Controls = styled.div`
 	align-items: center;
 	justify-content: center;
 `;
+
 export const SliderContainer = styled.div`
 	width: 90%;
 	margin: 10px auto 0 auto;
@@ -101,3 +104,13 @@ export const StyledSlider = styled.input.attrs({
 	}
   `;
   
+export const VolumeIcon = styled.span`
+background-image: url(${VOLUME_IMAGE});
+width: 10px;
+height: 10px;
+display: block;
+content: '';
+background-size: cover;
+background-repeat: no-repeat;
+margin-right: 10px;
+`;

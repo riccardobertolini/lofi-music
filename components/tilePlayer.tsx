@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import Image from 'next/image'
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import {
   AudioPlayer,
@@ -7,6 +7,7 @@ import {
   Controls,
   SliderContainer,
   StyledSlider,
+  VolumeIcon,
 } from './tilePlayer.style'
 import { ReactPlayerProps } from "react-player";
 
@@ -96,7 +97,7 @@ export const TilePlayer = ({
         />
       </SliderContainer>
       <Controls>
-        <span>🔊</span>
+        <VolumeIcon />
         <input
           type="range"
           min={0}
