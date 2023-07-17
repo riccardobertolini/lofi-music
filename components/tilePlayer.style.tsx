@@ -105,12 +105,12 @@ export const StyledSlider = styled.input.attrs({
   `;
   
 export const VolumeIcon = styled.span`
-background-image: url(${VOLUME_IMAGE});
-width: 20px;
-height: 20px;
-display: block;
-content: '';
-background-size: cover;
-background-repeat: no-repeat;
-margin-right: 10px;
+	background-image: url(${VOLUME_IMAGE});
+	width: 20px;
+	height: 20px;
+	display: block;
+	content: '';
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-right: 10px;
 `;
