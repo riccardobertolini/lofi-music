@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
@@ -24,11 +25,17 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.22.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.3",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-styled-components": "^2.1.4",
+    "jest": "^29.6.1",
+    "jest-environment-jsdom": "^29.6.1",
     "prettier": "^3.0.0",
+    "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
   }
 }
