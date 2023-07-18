@@ -55,3 +55,18 @@ export const CloseButton = styled.span`
     height: 30px;
   }
 `
+export const ColorPickerWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 20px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px;
+  }
+`
