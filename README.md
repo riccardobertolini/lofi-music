@@ -28,3 +28,6 @@ Open [http://localhost:3000](http://localhost:3000) (default port) to view it in
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
+
+### How to contribute
+Please feel free to open issues, pull requests and refactor/fix! This is a living project and any help is welcome. Thanks!
