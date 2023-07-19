@@ -1,6 +1,6 @@
 # Lofi-Music 🎵
 
-A React 18 + NextJS project, created for fun. I was tired to open YouTube for some lofi music when working 🤭.
+A React 18 + NextJS project, created for fun. I was tired to open YouTube for some lo-fi music while working 🤭.
 
 A live demo for a quick preview, is available [👉 clicking here](https://www.lofimusic.dev/).
 
