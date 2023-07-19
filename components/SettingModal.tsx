@@ -1,6 +1,5 @@
-mport React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { SettingsOutlined } from '@mui/icons-material'
-import { SwatchesPicker } from 'react-color';
 
 import {
   Container,
@@ -29,7 +28,7 @@ const colors: Color[] = [
 const SettingModal = () => {
   const ModalRef = useRef(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
-const [selectedColor, setSelectedColor] = useState<Color>(null);
+const [selectedColor, setSelectedColor] = useState<Color>();
 
   const openModal = (): void => {
     setIsOpen(true)
