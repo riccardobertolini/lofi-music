@@ -9,7 +9,7 @@ import PrefetchImages from '@/components/PrefetchImages'
 
 export default function Home() {
   const [randomTracks, setRandomTracks] = useState([])
-
+  const [isDatePickerOpen, setDatePickerOpen] = useState(false)
   const musicList = [
     {
       imageSrc: '/img/lofi.jpg',
@@ -73,8 +73,15 @@ export default function Home() {
     },
   ]
 
+  const handleClose = () => {
+    if (isDatePickerOpen) {
+      setDatePickerOpen(!isDatePickerOpen)
+    }
+  }
+
   return (
-    <div>
+    <div onClick={handleClose}
+    >
       <PrefetchImages />
       <Header>
         <FullScreenMode />
@@ -87,7 +94,8 @@ export default function Home() {
       <Title>
         Create your working <div>sounds</div>
       </Title>
-      <Datecalendar />
+
+      <Datecalendar isDatePickerOpen={isDatePickerOpen} setDatePickerOpen={setDatePickerOpen} />
       <MusicTiles musicList={musicList} randomTracks={randomTracks} />
       <Footer>
         <a href="https://github.com/riccardobertolini/lofi-music">

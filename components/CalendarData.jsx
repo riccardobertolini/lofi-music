@@ -2,16 +2,20 @@ import React, { useState } from 'react'
 import { Title } from './App.style'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-const Datecalendar = () => {
+const Datecalendar = ({ isDatePickerOpen, setDatePickerOpen }) => {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [isDatePickerOpen, setDatePickerOpen] = useState(false)
 
   const handleDateClick = () => {
     setDatePickerOpen(true)
   }
+  const handleClose = () => {
+    if (isDatePickerOpen) {
+      setDatePickerOpen(!isDatePickerOpen)
+    }
+  }
 
   const handleDateChange = (date) => {
-    setCurrentTime(date)
+    // setCurrentTime(date)
     setDatePickerOpen(false)
   }
 
@@ -22,6 +26,7 @@ const Datecalendar = () => {
   return (
     <>
       <div
+        onClick={handleClose}
         style={{
           textAlign: 'center',
           color: 'white',
