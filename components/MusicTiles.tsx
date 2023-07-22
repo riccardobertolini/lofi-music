@@ -3,13 +3,23 @@ import { TilesContainer } from './App.style'
 import { TilePlayer } from './tilePlayer'
 import ActiveSounds from './ActiveSounds'
 
-const MusicTiles = ({ musicList, randomTracks }) => {
+interface MusicTilesProp {
+  musicList: Music[]
+  randomTracks: number[]
+}
+
+type Music = {
+  src: string
+  imageSrc: string
+}
+
+const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
   const [activeSounds, setActiveSounds] = useState(0)
   const [stopAllTrigger, doStopAllTrigger] = useState(0)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
   const [timer, setTimer] = useState(0)
   const [minutes, setMinutes] = useState(0)
-  const [second, setSecond] = useState(0)
+  // const [second, setSecond] = useState(0)
 
   useEffect(() => {
     if (activeSounds > 0 && !isTimerRunning) {
@@ -21,7 +31,7 @@ const MusicTiles = ({ musicList, randomTracks }) => {
   }, [activeSounds, isTimerRunning])
 
   useEffect(() => {
-    let interval
+    let interval: NodeJS.Timer
     if (isTimerRunning) {
       interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer + 1)
@@ -33,7 +43,7 @@ const MusicTiles = ({ musicList, randomTracks }) => {
     }
   }, [isTimerRunning])
 
-  const incrementActiveSounds = (playing) => {
+  const incrementActiveSounds = (playing: boolean) => {
     if (playing) {
       setActiveSounds((prevActiveSounds) => prevActiveSounds + 1)
     } else {
@@ -60,7 +70,7 @@ const MusicTiles = ({ musicList, randomTracks }) => {
         stopAll={stopAll}
       />
       <TilesContainer>
-        {musicList.map((music, index) => (
+        {musicList.map((music: Music, index: number) => (
           <TilePlayer
             imageSrc={music.imageSrc}
             src={music.src}
