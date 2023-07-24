@@ -20,6 +20,7 @@ export const ModalContent = styled.div`
   width: 40rem;
   max-width: 90vw;
   min-height: 10rem;
+  max-height: 90vh;
   background-color: #fff;
   padding: 20px;
   display: flex;
