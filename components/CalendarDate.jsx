@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Title } from './App.style'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-const Datecalendar = ({ isDatePickerOpen, setDatePickerOpen }) => {
+const CalendarDate = ({ isDatePickerOpen, setDatePickerOpen }) => {
   const [currentTime, setCurrentTime] = useState(new Date())
 
   const handleDateClick = () => {
@@ -64,4 +64,4 @@ const Datecalendar = ({ isDatePickerOpen, setDatePickerOpen }) => {
   )
 }
 
-export default Datecalendar
+export default CalendarDate

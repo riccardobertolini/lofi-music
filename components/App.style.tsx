@@ -64,9 +64,12 @@ export const TilesContainer = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 8px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
 `
 
 export const Footer = styled.div`

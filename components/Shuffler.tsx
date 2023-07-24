@@ -1,5 +1,7 @@
 import React from 'react';
 import {Container} from './Shuffler.style'
+import {MuiVariants} from "../constants/colors";
+import ShuffleIcon from '@mui/icons-material/Shuffle';
 
 const Shuffler = ({ setRandomTracks, totalTracks }: { setRandomTracks: (value: number[]) => void, totalTracks: number }) => {
     const getMultipleRandomTracks = (arr: number[], num: number) => {
@@ -13,9 +15,11 @@ const Shuffler = ({ setRandomTracks, totalTracks }: { setRandomTracks: (value: n
 
     return (
         <Container>
-            <div className="shuffler" onClick={
+            <ShuffleIcon onClick={
                 () => setRandomTracks(getMultipleRandomTracks(Array.from(Array(totalTracks).keys()), 3))
-            } />
+            }
+                sx={{ fontSize: '32px',  color: MuiVariants.NEUTRAL }}
+            />
         </Container >
     );
 };

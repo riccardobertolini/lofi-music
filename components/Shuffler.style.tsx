@@ -6,9 +6,7 @@ export const Container = styled.div`
     width: 36px;
     cursor: pointer;
     color: #fff;
-    position: absolute;
-    top: 6px;
-    right: 90px;
+    position: relative;
     content: "";
     background-size: contain;
     background-image: url('/img/shuffle.png');
@@ -20,8 +18,6 @@ export const Container = styled.div`
     .shuffler {
       height: 35px;
       width: 35px;
-      top: 10px;
-      right: 80px;
     }
   }
 `;
