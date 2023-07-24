@@ -18,7 +18,8 @@ export const ModalWrapper = styled.div`
 export const ModalContent = styled.div`
   position: relative;
   width: 40rem;
-  height: 10rem;
+  max-width: 90vw;
+  min-height: 10rem;
   background-color: #fff;
   padding: 20px;
   display: flex;
@@ -59,7 +60,6 @@ export const ColorPickerWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 100%;
   padding: 20px;
 
   div {
