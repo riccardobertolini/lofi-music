@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-margin-left: 5px;
+  margin-left: 5px;
 `
 
 export const ModalWrapper = styled.div`

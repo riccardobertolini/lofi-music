@@ -15,7 +15,7 @@ export const Title = styled.h1`
 
     display: inline-block;
     font-size: 2em;
-    
+
     span {
       color: white;
       mix-blend-mode: difference;
