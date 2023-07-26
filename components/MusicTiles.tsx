@@ -85,7 +85,6 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
           />
         ))}
       </TilesContainer>
-      {isTimerRunning && <p>Timer: {timer} seconds</p>}
     </div>
   )
 }

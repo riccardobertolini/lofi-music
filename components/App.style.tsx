@@ -12,19 +12,19 @@ export const Title = styled.h1`
     width: 100%;
     text-transform: uppercase;
     font-weight: bold;
-    background-image: linear-gradient(
-      -225deg,
-      #231557 0%,
-      #44107a 29%,
-      #ff1361 67%,
-      #fff800 100%
-    );
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textclip 2s linear infinite;
     display: inline-block;
     font-size: 2em;
+    
+    span {
+      color: white;
+      mix-blend-mode: difference;
+      background: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-color: white;
+    }
   }
 `
 

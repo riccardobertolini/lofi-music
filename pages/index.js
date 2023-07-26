@@ -19,8 +19,7 @@ export default function Home() {
   }
 
   return (
-    <div onClick={handleClose}
-    >
+    <div onClick={handleClose} className="mainWrapper">
       <PrefetchImages />
       <Header>
         <FullScreenMode />
@@ -31,7 +30,7 @@ export default function Home() {
         <SettingModal />
       </Header>
       <Title>
-        Create your working <div>sounds</div>
+        Create your working <div><span>sounds</span></div>
       </Title>
 
       <CalendarDate isDatePickerOpen={isDatePickerOpen} setDatePickerOpen={setDatePickerOpen} />
