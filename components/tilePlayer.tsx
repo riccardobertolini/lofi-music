@@ -49,9 +49,13 @@ export const TilePlayer = ({
     isPlaying ? setPlaying(true) : setPlaying(false)
   }, [isPlaying])
 
+  useEffect(() => {
+    incrementActiveSounds(playing)
+  }, [playing])
+
   const togglePlay = () => {
     setPlaying((prevPlaying) => !prevPlaying)
-    incrementActiveSounds(!playing)
+    // incrementActiveSounds(!playing)
   }
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {

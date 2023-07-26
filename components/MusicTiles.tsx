@@ -53,7 +53,7 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
 
   const stopAll = () => {
     doStopAllTrigger((prevStopAllTrigger) => prevStopAllTrigger + 1)
-    setActiveSounds(0)
+    //setActiveSounds(0)
     setMinutes(0)
     setTimer(0)
   }
@@ -61,6 +61,10 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
     setMinutes(minutes + 1)
     setTimer(0)
   }
+  useEffect(() => {
+    setActiveSounds(0)
+  },[])
+
   return (
     <div>
       <ActiveSounds
