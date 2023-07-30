@@ -93,7 +93,11 @@ const SettingModal = () => {
       {isOpen && (
         <ModalWrapper ref={ModalRef}>
           <ModalContent>
-            <CloseButton onClick={closeModal} tabIndex={0}>
+            <CloseButton onClick={closeModal} onKeyDown={(e) => {
+              if(e.key == " " || e.key == "Enter" || e.key =="Return"){
+                closeModal()
+              }
+            }} tabIndex={0}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
