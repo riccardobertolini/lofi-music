@@ -84,8 +84,8 @@ const SettingModal = () => {
 
   return (
     <Container>
-      <IconButton onClick={openModal}>
-        <SettingsOutlined
+      <IconButton onClick={openModal} >
+        <SettingsOutlined aria-label='open settings modal '
           sx={{ fontSize: '24px', color: MuiVariants.NEUTRAL }}
         />
       </IconButton>
@@ -97,7 +97,7 @@ const SettingModal = () => {
               if(e.key == " " || e.key == "Enter" || e.key =="Return"){
                 closeModal()
               }
-            }} tabIndex={0}>
+            }} tabIndex={0} aria-label="close settings modal">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -123,7 +123,7 @@ const SettingModal = () => {
                     if(e.key == " " || e.key == "Return" || e.key == "Enter"){
                       handleColorChange(color)
                     }
-                  }} tabIndex={0}>
+                  }} tabIndex={0} aria-label={color + "as background"}>
                     <div
                       style={{
                         background: color.gradient,

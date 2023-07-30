@@ -22,7 +22,8 @@ const Shuffler = ({ setRandomTracks, totalTracks }: { setRandomTracks: (value: n
         <Container>
             <ShuffleIcon onClick={
                 () => setRandomTracks(getMultipleRandomTracks(Array.from(Array(totalTracks).keys()), 3))
-            }
+            } 
+            aria-label="shuffle random tracks"
             onKeyDown={
                 (e) => {
                     if(e.key == "Return" || e.key == " " || e.key == "Enter"){
