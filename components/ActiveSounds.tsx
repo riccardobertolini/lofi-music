@@ -1,5 +1,6 @@
 import React, { FC, CSSProperties, MouseEvent } from 'react';
 import { Subheading } from './App.style';
+import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 
 interface ActiveSoundsProps {
     timer: number;
@@ -9,10 +10,9 @@ interface ActiveSoundsProps {
 }
 
 const ActiveSounds: FC<ActiveSoundsProps> = ({ timer, minutes, activeSounds, stopAll }) => {
-
     let opacityValue = activeSounds ? 1 : 0;
-
     let linkStyle: CSSProperties = activeSounds ? {} : {pointerEvents: 'none', userSelect: 'none', cursor: 'pointer' };
+    const {tabIndex} =useAccessibilityContext()
 
     return (
         <>
@@ -21,7 +21,7 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({ timer, minutes, activeSounds, sto
                     {minutes < 10 ? `0${minutes}` : minutes}:
                     {timer < 10 ? `0${timer}` : timer}
                 </p>
-                Sounds active: {activeSounds} <br /> <a style={linkStyle} onClick={stopAll}>Stop all</a>
+                Sounds active: {activeSounds} <br /> <a style={linkStyle} onClick={stopAll} tabIndex={tabIndex}>Stop all</a>
             </Subheading>
         </>
     )

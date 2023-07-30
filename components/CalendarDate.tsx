@@ -3,6 +3,7 @@ import { Title } from './App.style'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
+import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 interface CalendarDateProps {
     isDatePickerOpen: boolean;
     setDatePickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,7 +11,7 @@ interface CalendarDateProps {
 
 const CalendarDate: FC<CalendarDateProps> = ({ isDatePickerOpen, setDatePickerOpen }) => {
     const [currentTime] = useState<Date>(new Date())
-
+    const {tabIndex} = useAccessibilityContext();
     const handleDateClick = () => {
         setDatePickerOpen(true)
     }
@@ -55,6 +56,13 @@ const CalendarDate: FC<CalendarDateProps> = ({ isDatePickerOpen, setDatePickerOp
               <span
                   style={{
                       WebkitBackgroundClip: 'text',
+                      cursor: "pointer"
+                  }}
+                  tabIndex={tabIndex}
+                  onKeyDown={(e) => {
+                    if(e.key == " " ||e.key == "Enter" ){
+                        handleDateClick()
+                    }
                   }}
                   onClick={handleDateClick}
               >

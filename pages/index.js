@@ -8,9 +8,13 @@ import CalendarDate from '../components/CalendarDate'
 import PrefetchImages from '@/components/PrefetchImages'
 import {musicList} from '@/data/musicList'
 
+import { useAccessibilityContext } from '../contexts/AccessibilityContext'
+
 export default function Home() {
   const [randomTracks, setRandomTracks] = useState([])
   const [isDatePickerOpen, setDatePickerOpen] = useState(false)
+  const {tabIndex} = useAccessibilityContext()
+  
 
   const handleClose = () => {
     if (isDatePickerOpen) {
@@ -36,7 +40,7 @@ export default function Home() {
       <CalendarDate isDatePickerOpen={isDatePickerOpen} setDatePickerOpen={setDatePickerOpen} />
       <MusicTiles musicList={musicList} randomTracks={randomTracks} />
       <Footer>
-        <a href="https://github.com/riccardobertolini/lofi-music">
+        <a href="https://github.com/riccardobertolini/lofi-music" tabIndex={tabIndex}>
           Open Source project 💖 feel free to contribute
         </a>{' '}
         <br />

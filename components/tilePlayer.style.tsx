@@ -19,6 +19,7 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 	border-radius: 10%;
 	position: relative;
 	z-index: 2;
+	cursor:pointer;
 
 	&::after {
 		display: block;

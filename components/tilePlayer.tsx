@@ -10,7 +10,7 @@ import {
   VolumeIcon,
 } from './tilePlayer.style'
 import { ReactPlayerProps } from "react-player";
-
+import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 interface TilePlayerProps {
@@ -38,7 +38,7 @@ export const TilePlayer = ({
   const [playing, setPlaying] = useState(false)
   const [volume, setVolume] = useState(1)
   const [progress, setProgress] = useState(0)
-
+  const {tabIndex} = useAccessibilityContext()
   const playerRef = useRef<ReactPlayerProps>(null)
 
   useEffect(() => {
@@ -76,7 +76,11 @@ export const TilePlayer = ({
 
   return (
     <AudioPlayer>
-      <ImageContainer $status={playing} onClick={togglePlay}>
+      <ImageContainer $status={playing} onClick={togglePlay} onKeyDown={(e) => {
+        if(e.key == " " || e.key == "Return" || e.key == "Enter"){
+          togglePlay()
+        }
+      }} tabIndex={tabIndex}>
         <Image width={300} height={300} src={imageSrc} alt="" />
         <ReactPlayer
           ref={playerRef}
@@ -109,6 +113,7 @@ export const TilePlayer = ({
           step={0.01}
           value={volume}
           onChange={handleVolumeChange}
+          tabIndex={tabIndex}
         />
       </Controls>
     </AudioPlayer>
