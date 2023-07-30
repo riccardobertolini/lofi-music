@@ -1,13 +1,17 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
+import AccessibilityContextProvider from '../contexts/AccessibilityContext'
 export default function Document() {
   return (
     <Html lang="en">
       <Head/>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
+
+      <AccessibilityContextProvider>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </AccessibilityContextProvider>
     </Html>
   );
 }
