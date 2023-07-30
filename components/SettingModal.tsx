@@ -9,7 +9,7 @@ import {
   ColorPickerWrapper,
 } from './SettingModal.style'
 import IconButton from './IconButton'
-
+import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import { MuiVariants } from '../constants/colors'
 
 interface Color {
@@ -42,21 +42,25 @@ const colors: Color[] = [
 ]
 
 const SettingModal = () => {
+  const {setModalVisible} = useAccessibilityContext();
   const ModalRef = useRef(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selectedColor, setSelectedColor] = useState<Color>()
 
   const openModal = (): void => {
     setIsOpen(true)
+    setModalVisible(true)
   }
 
   const closeModal = (): void => {
     setIsOpen(false)
+    setModalVisible(false)
   }
 
   const outsideClick = (e: MouseEvent): void => {
     if (ModalRef.current === e.target) {
       setIsOpen(false)
+      setModalVisible(false)
     }
   }
 
@@ -89,7 +93,7 @@ const SettingModal = () => {
       {isOpen && (
         <ModalWrapper ref={ModalRef}>
           <ModalContent>
-            <CloseButton onClick={closeModal}>
+            <CloseButton onClick={closeModal} tabIndex={0}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -111,7 +115,11 @@ const SettingModal = () => {
               <br />
               <ColorPickerWrapper>
                 {colors.map((color, index) => (
-                  <div key={index} onClick={() => handleColorChange(color)}>
+                  <div key={index} onClick={() => handleColorChange(color)} onKeyDown={(e) => {
+                    if(e.key == " " || e.key == "Return" || e.key == "Enter"){
+                      handleColorChange(color)
+                    }
+                  }} tabIndex={0}>
                     <div
                       style={{
                         background: color.gradient,

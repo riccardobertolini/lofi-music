@@ -1,5 +1,6 @@
 import React from 'react'
 import { ButtonStyled } from './IconButton.style'
+import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 
 interface IconButtonProps {
   type?: 'button' | 'submit' | 'reset'
@@ -12,8 +13,9 @@ const IconButton = ({
   onClick,
   children,
 }: IconButtonProps) => {
+  const {tabIndex} = useAccessibilityContext();
   return (
-    <ButtonStyled type={type} onClick={onClick}>
+    <ButtonStyled type={type} onClick={onClick} tabIndex={tabIndex}>
       {children}
     </ButtonStyled>
   )
