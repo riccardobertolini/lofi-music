@@ -1,4 +1,46 @@
 {
-  "presets": ["next/babel", "@babel/preset-react"],
-  "plugins": [["styled-components", { "ssr": true }]]
+  "env": {
+    "test": {
+      "presets": [
+        "next/babel",
+        "@babel/preset-react",
+        "@babel/preset-typescript"
+      ],
+      "plugins": [
+        [
+          "styled-components",
+          {
+            "ssr": true
+          }
+        ]
+      ]
+    },
+    "production": {
+      "presets": [
+        "next/babel"
+      ],
+      "plugins": [
+        [
+          "styled-components",
+          {
+            "ssr": true
+          }
+        ]
+      ]
+    },
+    "development": {
+      "presets": [
+        "next/babel"
+      ],
+      "plugins": [
+        [
+          "styled-components",
+          {
+            "ssr": true
+          }
+        ]
+      ]
+    }
+  }
 }
+
