@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "jsx": "preserve",
+    "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
@@ -28,7 +28,8 @@
   },
   "include": [
     "pages/**/*.ts",
-    "components/**/*.tsx"
+    "components/**/*.tsx",
+    "components/**/*.test.tsx"
   ],
   "exclude": [
     "node_modules",
