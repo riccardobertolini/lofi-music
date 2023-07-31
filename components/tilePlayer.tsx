@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
+import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import {
   AudioPlayer,
   ImageContainer,
@@ -9,9 +9,9 @@ import {
   StyledSlider,
   VolumeIcon,
 } from './tilePlayer.style'
-import { ReactPlayerProps } from "react-player";
+import { ReactPlayerProps } from 'react-player'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
-const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 interface TilePlayerProps {
   src: string
@@ -38,7 +38,7 @@ export const TilePlayer = ({
   const [playing, setPlaying] = useState(false)
   const [volume, setVolume] = useState(1)
   const [progress, setProgress] = useState(0)
-  const {tabIndex} = useAccessibilityContext()
+  const { tabIndex } = useAccessibilityContext()
   const playerRef = useRef<ReactPlayerProps>(null)
 
   useEffect(() => {
@@ -76,11 +76,16 @@ export const TilePlayer = ({
 
   return (
     <AudioPlayer>
-      <ImageContainer $status={playing} onClick={togglePlay} onKeyDown={(e) => {
-        if(e.key == " " || e.key == "Return" || e.key == "Enter"){
-          togglePlay()
-        }
-      }} tabIndex={tabIndex}>
+      <ImageContainer
+        $status={playing}
+        onClick={togglePlay}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key == ' ' || e.key == 'Return' || e.key == 'Enter') {
+            togglePlay()
+          }
+        }}
+        tabIndex={tabIndex}
+      >
         <Image width={300} height={300} src={imageSrc} alt="" />
         <ReactPlayer
           ref={playerRef}
