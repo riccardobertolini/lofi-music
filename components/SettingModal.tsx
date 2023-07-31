@@ -42,7 +42,7 @@ const colors: Color[] = [
 ]
 
 const SettingModal = () => {
-  const {setModalVisible} = useAccessibilityContext();
+  const { setModalVisible } = useAccessibilityContext()
   const ModalRef = useRef(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selectedColor, setSelectedColor] = useState<Color>()
@@ -84,8 +84,9 @@ const SettingModal = () => {
 
   return (
     <Container>
-      <IconButton onClick={openModal} >
-        <SettingsOutlined aria-label='open settings modal '
+      <IconButton onClick={openModal}>
+        <SettingsOutlined
+          aria-label="open settings modal "
           sx={{ fontSize: '24px', color: MuiVariants.NEUTRAL }}
         />
       </IconButton>
@@ -93,11 +94,16 @@ const SettingModal = () => {
       {isOpen && (
         <ModalWrapper ref={ModalRef}>
           <ModalContent>
-            <CloseButton onClick={closeModal} onKeyDown={(e) => {
-              if(e.key == " " || e.key == "Enter" || e.key =="Return"){
-                closeModal()
-              }
-            }} tabIndex={0} aria-label="close settings modal">
+            <CloseButton
+              onClick={closeModal}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key == ' ' || e.key == 'Enter' || e.key == 'Return') {
+                  closeModal()
+                }
+              }}
+              tabIndex={0}
+              aria-label="close settings modal"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -119,11 +125,21 @@ const SettingModal = () => {
               <br />
               <ColorPickerWrapper>
                 {colors.map((color, index) => (
-                  <div key={index} onClick={() => handleColorChange(color)} onKeyDown={(e) => {
-                    if(e.key == " " || e.key == "Return" || e.key == "Enter"){
-                      handleColorChange(color)
-                    }
-                  }} tabIndex={0} aria-label={color + "as background"}>
+                  <div
+                    key={index}
+                    onClick={() => handleColorChange(color)}
+                    onKeyDown={(e) => {
+                      if (
+                        e.key == ' ' ||
+                        e.key == 'Return' ||
+                        e.key == 'Enter'
+                      ) {
+                        handleColorChange(color)
+                      }
+                    }}
+                    tabIndex={0}
+                    aria-label={color + 'as background'}
+                  >
                     <div
                       style={{
                         background: color.gradient,
