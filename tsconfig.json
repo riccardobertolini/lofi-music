@@ -28,7 +28,8 @@
   },
   "include": [
     "pages/**/*.ts",
-    "components/**/*.tsx"
+    "components/**/*.tsx",
+    "components/**/*.test.tsx"
   ],
   "exclude": [
     "node_modules",
