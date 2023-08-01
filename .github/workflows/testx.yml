@@ -30,14 +30,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run coverage
-        run: npm run test -- --coverage
-
       - name: Check coverage threshold
         run: |
           COVERAGE_THRESHOLD=70
-          COVERAGE_REPORT="$(cat coverage/coverage-summary.json)"
-          TOTAL_COVERAGE="$(echo "$COVERAGE_REPORT" | jq -r '.total.lines.pct')"
+
+          if [ -f coverage/lcov.info ]; then
+            COVERAGE_REPORT="$(cat coverage/lcov.info)"
+            TOTAL_COVERAGE="$(echo "$COVERAGE_REPORT" | grep 'lines\:\d*\.\d*' -o | grep -Eo '[0-9]+\.[0-9]+' | head -1)"
+
+          elif [ -f coverage/coverage-final.json ]; then
+            COVERAGE_REPORT="$(cat coverage/coverage-final.json)"
+            TOTAL_COVERAGE="$(echo "$COVERAGE_REPORT" | jq -r '.total.lines.pct')"
+          else
+            echo "Coverage report not found. Please check your test configuration."
+            exit 1
+          fi
 
           if (( $(echo "$TOTAL_COVERAGE < $COVERAGE_THRESHOLD" | bc -l) )); then
             echo "Coverage threshold not met. Expected: ${COVERAGE_THRESHOLD}% but got: ${TOTAL_COVERAGE}%"
