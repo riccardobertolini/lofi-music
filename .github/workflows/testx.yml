@@ -34,4 +34,9 @@ jobs:
         run: npm install
 
       - name: Run coverage
-        run: npm run test -- --coverage --threshold=${COVERAGE_THRESHOLD}
+        run: |
+          npm run test -- --coverage
+          if [ $? -ne 0 ]; then
+            echo "Coverage threshold not met."
+            exit 1
+          fi
