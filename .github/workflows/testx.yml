@@ -30,6 +30,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: List directory contents
+        run: ls -la coverage/
+
+      - name: Print lcov file if exists
+        run: cat coverage/lcov.info || echo "lcov.info not found"
+
+      - name: Print JSON coverage file if exists
+        run: cat coverage/coverage-final.json || echo "coverage-final.json not found"
+
+
       - name: Check coverage threshold
         run: |
           COVERAGE_THRESHOLD=70
