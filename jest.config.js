@@ -21,4 +21,9 @@ module.exports = {
     '!**/jest.config.js',
     '!**/next-env.d.ts',
   ],
+  coverageThreshold: {
+    global: {
+      lines: 70,
+    },
+  },
 }

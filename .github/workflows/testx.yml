@@ -16,47 +16,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
-
-  check-coverage:
-    name: Check Test Coverage
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: List directory contents
-        run: ls -la coverage/
-
-      - name: Print lcov file if exists
-        run: cat coverage/lcov.info || echo "lcov.info not found"
-
-      - name: Print JSON coverage file if exists
-        run: cat coverage/coverage-final.json || echo "coverage-final.json not found"
-
-
-      - name: Check coverage threshold
+      - name: Run tests and check coverage
         run: |
-          COVERAGE_THRESHOLD=70
-
-          if [ -f coverage/lcov.info ]; then
-            COVERAGE_REPORT="$(cat coverage/lcov.info)"
-            TOTAL_COVERAGE="$(echo "$COVERAGE_REPORT" | grep 'lines\:\d*\.\d*' -o | grep -Eo '[0-9]+\.[0-9]+' | head -1)"
-
-          elif [ -f coverage/coverage-final.json ]; then
-            COVERAGE_REPORT="$(cat coverage/coverage-final.json)"
-            TOTAL_COVERAGE="$(echo "$COVERAGE_REPORT" | jq -r '.total.lines.pct')"
-          else
-            echo "Coverage report not found. Please check your test configuration."
-            exit 1
-          fi
-
-          if (( $(echo "$TOTAL_COVERAGE < $COVERAGE_THRESHOLD" | bc -l) )); then
-            echo "Coverage threshold not met. Expected: ${COVERAGE_THRESHOLD}% but got: ${TOTAL_COVERAGE}%"
+          npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json
+          if [ $? -ne 0 ]; then
+            echo "Coverage threshold not met."
             exit 1
           fi
