@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { PAUSE_IMAGE } from './tilePlayer.style'
+import { PAUSE_IMAGE } from './TilePlayer.style'
 
 const images: string[] = [PAUSE_IMAGE]
 

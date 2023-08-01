@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react'
 import MusicTiles from './../MusicTiles'
 import AccessibilityContextProvider from '../../contexts/AccessibilityContext'
 
-jest.mock('./../tilePlayer', () => {
+jest.mock('./../TilePlayer', () => {
   return {
     TilePlayer: jest.fn(({ incrementActiveSounds, isPlaying }) => (
       <div

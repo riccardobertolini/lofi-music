@@ -86,7 +86,7 @@ const SettingModal = () => {
     <Container>
       <IconButton onClick={openModal}>
         <SettingsOutlined
-          aria-label="open settings modal "
+          aria-label="open settings modal"
           sx={{ fontSize: '24px', color: MuiVariants.NEUTRAL }}
         />
       </IconButton>
