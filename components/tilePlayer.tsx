@@ -11,6 +11,8 @@ import {
 } from './tilePlayer.style'
 import { ReactPlayerProps } from 'react-player'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
+import 'components/ActiveSounds'
+
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 interface TilePlayerProps {
@@ -19,6 +21,7 @@ interface TilePlayerProps {
   incrementActiveSounds: (value: boolean) => void
   stopAllTrigger: number
   isPlaying: boolean
+  masterVolume: number
 }
 
 interface ProgressState {
@@ -34,6 +37,7 @@ export const TilePlayer = ({
   incrementActiveSounds,
   stopAllTrigger,
   isPlaying,
+  masterVolume
 }: TilePlayerProps) => {
   const [playing, setPlaying] = useState(false)
   const [volume, setVolume] = useState(1)
@@ -92,7 +96,7 @@ export const TilePlayer = ({
           url={src}
           playing={playing}
           loop
-          volume={volume}
+          volume={volume*masterVolume}
           width={0}
           height={0}
           onProgress={handleProgress}

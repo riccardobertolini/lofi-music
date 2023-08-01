@@ -19,7 +19,7 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
   const [isTimerRunning, setIsTimerRunning] = useState(false)
   const [timer, setTimer] = useState(0)
   const [minutes, setMinutes] = useState(0)
-  // const [second, setSecond] = useState(0)
+  const [masterVolume, setMasterVolume] = useState(1);
 
   useEffect(() => {
     if (activeSounds > 0 && !isTimerRunning) {
@@ -72,6 +72,7 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
         timer={timer}
         activeSounds={activeSounds}
         stopAll={stopAll}
+        setMasterVolume={setMasterVolume}
       />
       <TilesContainer>
         {musicList.map((music: Music, index: number) => (
@@ -82,6 +83,7 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
             incrementActiveSounds={incrementActiveSounds}
             stopAllTrigger={stopAllTrigger}
             isPlaying={randomTracks.includes(index)}
+            masterVolume={masterVolume}
           />
         ))}
       </TilesContainer>
