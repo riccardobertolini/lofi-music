@@ -1,6 +1,6 @@
 module.exports = {
   transform: {
-    '^.+\\.(ts|tsx)$': 'babel-jest',
+    '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
   },
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
@@ -8,4 +8,15 @@ module.exports = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '**/*.{js,jsx,ts,tsx}',
+    '!**/node_modules/**',
+    '!**/coverage/**',
+    '!**/.next/**',
+    '!**/next.config.js',
+    '!**/prettierrc.js',
+    '!**/jest.config.js',
+    '!**/next-env.d.ts',
+  ],
 }

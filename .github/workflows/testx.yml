@@ -1,0 +1,33 @@
+name: Run Tests and Coverage
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  check-coverage:
+    name: Check Test Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+      - name: Run coverage
+        run: npm run test -- --coverage

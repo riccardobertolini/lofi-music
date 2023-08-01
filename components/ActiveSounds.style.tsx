@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-export const VOLUME_IMAGE = '/img/volume.svg';
+import styled from 'styled-components'
+export const VOLUME_IMAGE = '/img/volume.svg'
 
-const font = 'Ubuntu, sans-serif';
-const fontSize = '16px';
+const font = 'Ubuntu, sans-serif'
+const fontSize = '16px'
 
 export const ControlBar = styled.div`
   transition: opacity 0.3s ease;
@@ -22,20 +22,20 @@ export const ControlBar = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-`;
+`
 
-export const TimerText = styled.text`
+export const TimerText = styled.div`
   color: rgba(255, 5, 100, 1);
   font-family: ${font};
   font-size: ${fontSize};
   font-weight: bold;
-`;
+`
 
-export const SoundsActiveText = styled.text`
+export const SoundsActiveText = styled.div`
   color: white;
   font-family: ${font};
   font-size: ${fontSize};
-`;
+`
 
 export const StopAllButton = styled.button`
   background-color: rgba(173, 0, 255, 0.43);
@@ -51,26 +51,26 @@ export const StopAllButton = styled.button`
   &:hover {
     background-color: #ff69b4;
   }
-`;
+`
 
 export const VolumeIcon = styled.span`
-	background-image: url(${VOLUME_IMAGE});
-	width: 20px;
-	height: 20px;
-	display: block;
-	content: '';
-	background-size: cover;
-	background-repeat: no-repeat;
-	margin-right: 10px;
-`;
+  background-image: url(${VOLUME_IMAGE});
+  width: 20px;
+  height: 20px;
+  display: block;
+  content: '';
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+`
 
 export const VolumeControl = styled.div`
-    display: flex;
-    align-items: center;
-`;
+  display: flex;
+  align-items: center;
+`
 
 export const Row = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `

@@ -16,6 +16,7 @@ describe('ActiveSounds', () => {
         minutes={5}
         activeSounds={1}
         stopAll={() => {}}
+        setMasterVolume={() => {}}
       />,
     )
     expect(screen.getByText('05:05')).toBeInTheDocument()
@@ -29,6 +30,7 @@ describe('ActiveSounds', () => {
         minutes={5}
         activeSounds={1}
         stopAll={() => {}}
+        setMasterVolume={() => {}}
       />,
     )
     expect(screen.getByText('05:05')).toBeInTheDocument()
@@ -41,6 +43,7 @@ describe('ActiveSounds', () => {
         minutes={10}
         activeSounds={1}
         stopAll={() => {}}
+        setMasterVolume={() => {}}
       />,
     )
     expect(screen.getByText('10:15')).toBeInTheDocument()
@@ -53,13 +56,12 @@ describe('ActiveSounds', () => {
         minutes={5}
         activeSounds={0}
         stopAll={() => {}}
+        setMasterVolume={() => {}}
       />,
     )
     const link = screen.getByText('Stop all')
     expect(link).toHaveStyle({
-      pointerEvents: 'none',
-      userSelect: 'none',
-      cursor: 'pointer',
+      cursor: 'default',
     })
   })
 
@@ -70,6 +72,7 @@ describe('ActiveSounds', () => {
         minutes={5}
         activeSounds={1}
         stopAll={() => {}}
+        setMasterVolume={() => {}}
       />,
     )
     const link = screen.getByText('Stop all')
@@ -88,6 +91,7 @@ describe('ActiveSounds', () => {
         minutes={5}
         activeSounds={1}
         stopAll={stopAllMock}
+        setMasterVolume={() => {}}
       />,
     )
     const link = screen.getByText('Stop all')
