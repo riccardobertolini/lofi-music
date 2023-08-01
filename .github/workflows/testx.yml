@@ -23,9 +23,6 @@ jobs:
     name: Check Test Coverage
     runs-on: ubuntu-latest
 
-    env:
-      COVERAGE_THRESHOLD: 70
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -34,9 +31,15 @@ jobs:
         run: npm install
 
       - name: Run coverage
+        run: npm run test -- --coverage
+
+      - name: Check coverage threshold
         run: |
-          npm run test -- --coverage
-          if [ $? -ne 0 ]; then
-            echo "Coverage threshold not met."
+          COVERAGE_THRESHOLD=70
+          COVERAGE_REPORT="$(cat coverage/coverage-summary.json)"
+          TOTAL_COVERAGE="$(echo "$COVERAGE_REPORT" | jq -r '.total.lines.pct')"
+
+          if (( $(echo "$TOTAL_COVERAGE < $COVERAGE_THRESHOLD" | bc -l) )); then
+            echo "Coverage threshold not met. Expected: ${COVERAGE_THRESHOLD}% but got: ${TOTAL_COVERAGE}%"
             exit 1
           fi
