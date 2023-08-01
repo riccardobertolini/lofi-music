@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { TilesContainer } from './App.style'
-import { TilePlayer } from './tilePlayer'
+import { TilePlayer } from './TilePlayer'
 import ActiveSounds from './ActiveSounds'
 
 interface MusicTilesProp {
@@ -63,7 +63,7 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
   }
   useEffect(() => {
     setActiveSounds(0)
-  },[])
+  }, [])
 
   return (
     <div>
