@@ -10,20 +10,23 @@ interface ActiveSoundsProps {
 }
 
 const ActiveSounds: FC<ActiveSoundsProps> = ({ timer, minutes, activeSounds, stopAll }) => {
-    let opacityValue = activeSounds ? 1 : 0;
+    let opacity = activeSounds ? 1 : 0;
     let linkStyle: CSSProperties = activeSounds ? {} : {pointerEvents: 'none', userSelect: 'none', cursor: 'pointer' };
     const {tabIndex} =useAccessibilityContext()
 
     return (
-        <>
-            <Subheading style={{ transition: 'opacity 0.3s ease', opacity: opacityValue, cursor: 'default'  }}>
-                <p style={{ color: '#ff1361'}}>
+        <div style={{ position:'fixed', bottom:20,left:'50%',transform: 'translateX(-50%)', zIndex:10,width:'100%', textAlign:'center' }}>
+            <Subheading style={{ opacity }}>
+                <p style={{ color: '#ff1361',margin:0,flex:'none'}}>
                     {minutes < 10 ? `0${minutes}` : minutes}:
                     {timer < 10 ? `0${timer}` : timer}
                 </p>
-                Sounds active: {activeSounds} <br /> <a style={linkStyle} onClick={stopAll} tabIndex={tabIndex}>Stop all</a>
+                <span style={{fontSize:'14px',flex:'none'}}>
+                    Sounds active: {activeSounds} 
+                </span>
+                 <a style={linkStyle} onClick={stopAll} tabIndex={tabIndex}>Stop all</a>
             </Subheading>
-        </>
+        </div>
     )
 }
 
