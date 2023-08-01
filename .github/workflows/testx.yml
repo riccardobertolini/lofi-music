@@ -23,11 +23,15 @@ jobs:
     name: Check Test Coverage
     runs-on: ubuntu-latest
 
+    env:
+      COVERAGE_THRESHOLD: 70
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install dependencies
         run: npm install
+
       - name: Run coverage
-        run: npm run test -- --coverage
+        run: npm run test -- --coverage --threshold=${COVERAGE_THRESHOLD}
