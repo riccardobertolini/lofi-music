@@ -5,13 +5,13 @@ import SettingModal from '@/components/SettingModal'
 import FullScreenMode from '@/components/FullScreenMode'
 import Shuffler from '@/components/Shuffler'
 import PrefetchImages from '@/components/PrefetchImages'
-import {musicList} from '@/data/musicList'
+import { musicList } from '@/data/musicList'
 
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 
 export default function Home() {
   const [randomTracks, setRandomTracks] = useState([])
-  const {tabIndex} = useAccessibilityContext()
+  const { tabIndex } = useAccessibilityContext()
 
   return (
     <div className="mainWrapper">
