@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+
 import {
   AudioPlayer,
   ImageContainer,
@@ -8,7 +9,7 @@ import {
   SliderContainer,
   StyledSlider,
   VolumeIcon,
-} from './tilePlayer.style'
+} from './TilePlayer.style'
 import { ReactPlayerProps } from 'react-player'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import 'components/ActiveSounds'
