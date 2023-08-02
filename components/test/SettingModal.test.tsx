@@ -44,4 +44,21 @@ describe('SettingModal Component', () => {
       'rgb(33, 147, 176)',
     )
   })
+  it('should not render the modal initially', () => {
+    expect(
+      screen.queryByLabelText('close settings modal'),
+    ).not.toBeInTheDocument()
+  })
+
+  it('should select color using the keyboard', () => {
+    const button = screen.getByLabelText('open settings modal')
+    fireEvent.click(button)
+
+    const colorDiv = screen.getByLabelText('cool blue as background')
+    fireEvent.keyDown(colorDiv, { key: 'Enter' })
+
+    expect(document.documentElement.style.backgroundColor).toBe(
+      'rgb(33, 147, 176)',
+    )
+  })
 })
