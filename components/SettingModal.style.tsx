@@ -33,6 +33,11 @@ export const ModalContent = styled.div`
 `
 
 export const BackgroundColorWidget = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
   p {
     font-weight: bold;
   }
@@ -51,15 +56,18 @@ export const ColorOption = styled.div<ColorOptionProps>`
   border: 1px solid #eee;
   background: ${(props) => props.background};
   border-radius: 40px;
+  min-width: 150px;
 
   div {
     padding: 10px;
     background: white;
     min-width: calc(100% - 20px);
     text-transform: capitalize;
-    font-weight: 900;
+    font-size: 15px;
+    font-weight: 600;
     transition: 0.2s;
     border-radius: 40px;
+    text-align: center;
 
     &:hover {
       background: transparent;
@@ -90,7 +98,6 @@ export const ColorPickerWrapper = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 20px;
-  max-width: 350px;
-  flex-direction: column;
-  gap: 5px;
+  max-width: 400px;
+  gap: 10px;
 `
