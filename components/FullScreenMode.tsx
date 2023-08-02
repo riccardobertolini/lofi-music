@@ -16,7 +16,7 @@ const FullScreenMode = () => {
     <IconButton onClick={toggleFullScreen}>
       {isFullScreen ? (
         <FullscreenExitOutlined
-          sx={{ fontSize: '32px',  color: MuiVariants.NEUTRAL }}
+          sx={{ fontSize: '32px', color: MuiVariants.NEUTRAL }}
         />
       ) : (
         <FullscreenOutlined

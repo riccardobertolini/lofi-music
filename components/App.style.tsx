@@ -35,14 +35,14 @@ export const Subheading = styled.div`
   color: #fff;
   transition: opacity 0.3s ease;
   cursor: default;
-  border-radius:20px;
+  border-radius: 20px;
   background: rgba(98, 98, 98, 0.3);
-  border:1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   width: auto;
   display: inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
   backdrop-filter: blur(16px);
   padding: 6px 6px 6px 20px;
 
@@ -53,11 +53,11 @@ export const Subheading = styled.div`
     text-decoration: underline;
     cursor: pointer;
     transition: color 0.5s ease;
-    color:#fff;
-    border-radius:inherit;
-    padding:6px 10px;
-    flex:none;
-    text-decoration:none
+    color: #fff;
+    border-radius: inherit;
+    padding: 6px 10px;
+    flex: none;
+    text-decoration: none;
   }
   a:hover {
     background: #cc00cc;
