@@ -16,6 +16,14 @@ const renderWithProviders = (component: React.ReactNode) => {
 }
 
 describe('<FullScreenMode />', () => {
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  beforeEach(() => {
+    jest.restoreAllMocks()
+  })
+
   it('renders the FullscreenOutlined icon when not in full-screen mode', () => {
     renderWithProviders(<FullScreenMode />)
     expect(screen.getByTestId('FullscreenOutlinedIcon')).toBeInTheDocument()
@@ -34,5 +42,15 @@ describe('<FullScreenMode />', () => {
 
     expect(exitFullScreen).toHaveBeenCalled()
     expect(screen.getByTestId('FullscreenOutlinedIcon')).toBeInTheDocument()
+  })
+
+  it('returns early if fullscreenElement is falsy', () => {
+    Object.defineProperty(document, 'fullscreenElement', {
+      value: null,
+      writable: true,
+      configurable: true,
+    })
+
+    expect(document.fullscreenElement).toBeNull()
   })
 })
