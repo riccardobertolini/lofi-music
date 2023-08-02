@@ -44,6 +44,7 @@ describe('SettingModal Component', () => {
       'rgb(33, 147, 176)',
     )
   })
+
   it('should not render the modal initially', () => {
     expect(
       screen.queryByLabelText('close settings modal'),
