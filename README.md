@@ -27,7 +27,16 @@ Open [http://localhost:3000](http://localhost:3000) (default port) to view it in
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
+
+### `npm test`
+
+Run all the tests and check if they all pass.
+
+### `npm test -- --coverage`
+
+Check the test coverage (minimum required global 70%). 
+Once run the command, search for `/coverage` folder, then `/lcov-report` and open `index.html` in a browser.
 
 ### How to contribute
 Please feel free to open issues, pull requests and refactor/fix! This is a living project and any help is welcome. Thanks!
