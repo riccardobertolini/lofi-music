@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { SettingsOutlined } from '@mui/icons-material'
-
 import {
   Container,
   CloseButton,
   ModalContent,
   ModalWrapper,
   ColorPickerWrapper,
+  BackgroundColorWidget,
+  ColorOption,
 } from './SettingModal.style'
 import IconButton from './IconButton'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
@@ -109,7 +110,7 @@ const SettingModal = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="currentColor"
+                stroke={selectedColor?.fallback || '#000'}
                 className="w-6 h-6"
               >
                 <path
@@ -119,16 +120,14 @@ const SettingModal = () => {
                 />
               </svg>
             </CloseButton>
-            <div className="aboutus">
-              <br />
-              Update the background colors
-              <br />
+            <BackgroundColorWidget>
+              <p>Update the background colors:</p>
               <ColorPickerWrapper>
                 {colors.map((color, index) => (
-                  <div
+                  <ColorOption
                     key={index}
                     onClick={() => handleColorChange(color)}
-                    onKeyDown={(e) => {
+                    onKeyDown={(e: React.KeyboardEvent) => {
                       if (
                         e.key == ' ' ||
                         e.key == 'Return' ||
@@ -138,21 +137,14 @@ const SettingModal = () => {
                       }
                     }}
                     tabIndex={0}
-                    aria-label={color + 'as background'}
+                    aria-label={color.name + ' as background'}
+                    background={color.gradient}
                   >
-                    <div
-                      style={{
-                        background: color.gradient,
-                        borderRadius: '50%',
-                        width: '30px',
-                        height: '30px',
-                      }}
-                    ></div>
                     <div>{color.name}</div>
-                  </div>
+                  </ColorOption>
                 ))}
               </ColorPickerWrapper>
-            </div>
+            </BackgroundColorWidget>
           </ModalContent>
         </ModalWrapper>
       )}
