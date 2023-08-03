@@ -12,6 +12,8 @@ A live demo for a quick preview, is available [👉 clicking here](https://www.l
 * Components/Layout based
 * Prettier for better readability 
 
+[![codecov](https://codecov.io/github/riccardobertolini/lofi-music/branch/main/graph/badge.svg?token=H6ME1MYXCK)](https://codecov.io/github/riccardobertolini/lofi-music)
+
 ![alt text](https://raw.githubusercontent.com/riccardobertolini/lofi-music/master/public/github_image.png)
 
 
