@@ -98,4 +98,20 @@ describe('ActiveSounds', () => {
     fireEvent.click(link)
     expect(stopAllMock).toHaveBeenCalled()
   })
+
+  it('calls setMasterVolume with the correct value when input changes', () => {
+    const setMasterVolumeMock = jest.fn()
+    render(
+      <ActiveSounds
+        timer={5}
+        minutes={5}
+        activeSounds={1}
+        stopAll={() => {}}
+        setMasterVolume={setMasterVolumeMock}
+      />,
+    )
+    const input = screen.getByRole('slider')
+    fireEvent.change(input, { target: { value: '0.5' } })
+    expect(setMasterVolumeMock).toHaveBeenCalledWith(0.5)
+  })
 })
