@@ -25,7 +25,7 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
   stopAll,
   setMasterVolume,
 }) => {
-  let opacityValue = activeSounds ? 1 : 0
+  let displayValue = activeSounds ? 'block' : 'none'
   const { tabIndex } = useAccessibilityContext()
 
   const handleMasterVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
   }
 
   return (
-    <ControlBar style={{ opacity: opacityValue }}>
+    <ControlBar style={{ display: displayValue }}>
       <Row>
         <TimerText>
           {minutes < 10 ? `0${minutes}` : minutes}:
