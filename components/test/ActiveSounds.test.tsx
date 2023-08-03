@@ -19,7 +19,15 @@ describe('ActiveSounds', () => {
         setMasterVolume={() => {}}
       />,
     )
-    expect(screen.getByText('05:05')).toBeInTheDocument()
+    const minutesElement = screen.getByTestId('minutes-text')
+    const secondsElement = screen.getByTestId('seconds-text')
+
+    expect(minutesElement).toBeInTheDocument()
+    expect(minutesElement).toHaveTextContent('05')
+
+    expect(secondsElement).toBeInTheDocument()
+    expect(secondsElement).toHaveTextContent('05')
+
     expect(screen.getByText('Sounds active: 1')).toBeInTheDocument()
   })
 
@@ -33,7 +41,14 @@ describe('ActiveSounds', () => {
         setMasterVolume={() => {}}
       />,
     )
-    expect(screen.getByText('05:05')).toBeInTheDocument()
+    const minutesElement = screen.getByTestId('minutes-text')
+    const secondsElement = screen.getByTestId('seconds-text')
+
+    expect(minutesElement).toBeInTheDocument()
+    expect(minutesElement).toHaveTextContent('05')
+
+    expect(secondsElement).toBeInTheDocument()
+    expect(secondsElement).toHaveTextContent('05')
   })
 
   it('formats time correctly without leading zeros', () => {
@@ -46,7 +61,15 @@ describe('ActiveSounds', () => {
         setMasterVolume={() => {}}
       />,
     )
-    expect(screen.getByText('10:15')).toBeInTheDocument()
+
+    const minutesElement = screen.getByTestId('minutes-text')
+    const secondsElement = screen.getByTestId('seconds-text')
+
+    expect(minutesElement).toBeInTheDocument()
+    expect(minutesElement).toHaveTextContent('10')
+
+    expect(secondsElement).toBeInTheDocument()
+    expect(secondsElement).toHaveTextContent('15')
   })
 
   it('hides the link when activeSounds is 0', () => {

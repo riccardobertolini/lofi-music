@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react'
 import MusicTiles from './../MusicTiles'
 import AccessibilityContextProvider from '../../contexts/AccessibilityContext'
 
@@ -22,6 +22,11 @@ const musicList = [
 ]
 
 describe('MusicTiles', () => {
+  afterAll(() => {
+    jest.clearAllTimers()
+    jest.useRealTimers()
+  })
+
   it('renders without crashing', () => {
     render(
       <AccessibilityContextProvider>
@@ -55,5 +60,36 @@ describe('MusicTiles', () => {
 
     fireEvent.click(stopAllButton)
     expect(getByText('Sounds active: 0')).toBeInTheDocument()
+  })
+
+  it('updates minutes and resets timer when timer reaches 60', () => {
+    jest.useFakeTimers()
+
+    const { container } = render(
+      <AccessibilityContextProvider>
+        <MusicTiles musicList={musicList} randomTracks={[0]} />
+      </AccessibilityContextProvider>,
+    )
+
+    // Simulate the timer reaching 60 seconds step by step
+    act(() => {
+      jest.advanceTimersToNextTimer() // Step 1: 0 seconds
+    })
+
+    // The state should be 0 minutes and 0 seconds
+    const minutesElement = container.querySelector(
+      '[data-testid="minutes-text"]',
+    )
+    const secondsElement = container.querySelector(
+      '[data-testid="seconds-text"]',
+    )
+    expect(minutesElement?.textContent).toBe('00')
+    expect(secondsElement?.textContent).toBe('00')
+
+    act(() => {
+      jest.advanceTimersToNextTimer() // Step 2: 1 minute
+    })
+
+    jest.useRealTimers()
   })
 })
