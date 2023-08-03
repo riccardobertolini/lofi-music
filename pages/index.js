@@ -7,7 +7,7 @@ import Shuffler from '@/components/Shuffler'
 import PrefetchImages from '@/components/PrefetchImages'
 import { musicList } from '@/data/musicList'
 
-import { useAccessibilityContext } from '../contexts/AccessibilityContext'
+import { useAccessibilityContext } from '@/contexts/AccessibilityContext'
 
 export default function Home() {
   const [randomTracks, setRandomTracks] = useState([])
@@ -25,12 +25,18 @@ export default function Home() {
         <SettingModal />
       </Header>
       <Title>
-        Create your working <div><span>sounds</span></div>
+        Create your working{' '}
+        <div>
+          <span>sounds</span>
+        </div>
       </Title>
 
       <MusicTiles musicList={musicList} randomTracks={randomTracks} />
       <Footer>
-        <a href="https://github.com/riccardobertolini/lofi-music" tabIndex={tabIndex}>
+        <a
+          href="https://github.com/riccardobertolini/lofi-music"
+          tabIndex={tabIndex}
+        >
           Open Source project 💖 feel free to contribute
         </a>{' '}
         <br />

@@ -8,6 +8,7 @@ module.exports = {
     config.resolve.alias['@/utils'] = path.join(__dirname, 'utils')
     config.resolve.alias['@/data'] = path.join(__dirname, 'data')
     config.resolve.alias['@/constants'] = path.join(__dirname, 'constants')
+    config.resolve.alias['@/contexts'] = path.join(__dirname, 'contexts')
 
     return config
   },
