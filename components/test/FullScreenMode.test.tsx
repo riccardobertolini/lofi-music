@@ -53,4 +53,18 @@ describe('<FullScreenMode />', () => {
 
     expect(document.fullscreenElement).toBeNull()
   })
+
+  it('returns early and does not call exit functions if fullscreenElement is truthy', () => {
+    const realFullScreenModeUtils = jest.requireActual<typeof enterFullScreen>(
+      '../../utils/FullScreenMode',
+    )
+    // @ts-ignore
+    const exitFullScreen = realFullScreenModeUtils.exitFullScreen
+    Object.defineProperties(document, {
+      fullscreenElement: {},
+    })
+
+    const test = exitFullScreen()
+    expect(test).toBeNull()
+  })
 })
