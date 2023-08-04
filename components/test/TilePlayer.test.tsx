@@ -71,4 +71,32 @@ describe('TilePlayer', () => {
     })
     expect(volumeInput).toHaveValue('0.5')
   })
+
+  it('should handle seek', () => {
+    const props = {
+      src: 'http://test-src',
+      imageSrc: 'http://test-image-src',
+      incrementActiveSounds: jest.fn(),
+      stopAllTrigger: 0,
+      isPlaying: false,
+      masterVolume: 1,
+    }
+
+    const { getAllByRole } = render(
+      <AccessibilityContextProvider>
+        <TilePlayer {...props} />
+      </AccessibilityContextProvider>,
+    )
+
+    const sliders = getAllByRole('slider')
+
+    const progressInput = sliders[1]
+    act(() => {
+      // @ts-ignore
+      progressInput.value = '0.7'
+      fireEvent.input(progressInput, { target: { value: '0.7' } })
+    })
+
+    expect(progressInput).toHaveValue('0.7')
+  })
 })

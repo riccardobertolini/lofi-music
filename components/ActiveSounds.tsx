@@ -37,8 +37,13 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
     <ControlBar style={{ display: displayValue }}>
       <Row>
         <TimerText>
-          {minutes < 10 ? `0${minutes}` : minutes}:
-          {timer < 10 ? `0${timer}` : timer}
+          <span data-testid="minutes-text">
+            {minutes < 10 ? `0${minutes}` : minutes}
+          </span>
+          :
+          <span data-testid="seconds-text">
+            {timer < 10 ? `0${timer}` : timer}
+          </span>
         </TimerText>
         <SoundsActiveText>Sounds active: {activeSounds}</SoundsActiveText>
         <StopAllButton onClick={stopAll} tabIndex={tabIndex}>
