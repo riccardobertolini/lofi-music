@@ -22,7 +22,8 @@ const musicList = [
 ]
 
 describe('MusicTiles', () => {
-  afterAll(() => {
+  afterEach(() => {
+    jest.clearAllMocks()
     jest.clearAllTimers()
     jest.useRealTimers()
   })
@@ -65,30 +66,26 @@ describe('MusicTiles', () => {
   it('updates minutes and resets timer when timer reaches 60', () => {
     jest.useFakeTimers()
 
-    const { container } = render(
+    const { getAllByTestId, getByTestId } = render(
       <AccessibilityContextProvider>
         <MusicTiles musicList={musicList} randomTracks={[0]} />
       </AccessibilityContextProvider>,
     )
 
-    // Simulate the timer reaching 60 seconds step by step
+    // Assume the incrementActiveSounds is called, starts timer
+    const tilePlayers = getAllByTestId('tileplayer')
+    fireEvent.click(tilePlayers[0])
+
+    // Simulate 60 seconds passing
     act(() => {
-      jest.advanceTimersToNextTimer() // Step 1: 0 seconds
+      jest.advanceTimersByTime(60000)
     })
 
-    // The state should be 0 minutes and 0 seconds
-    const minutesElement = container.querySelector(
-      '[data-testid="minutes-text"]',
-    )
-    const secondsElement = container.querySelector(
-      '[data-testid="seconds-text"]',
-    )
-    expect(minutesElement?.textContent).toBe('00')
-    expect(secondsElement?.textContent).toBe('00')
-
-    act(() => {
-      jest.advanceTimersToNextTimer() // Step 2: 1 minute
-    })
+    // The state should be 1 minute and 0 seconds
+    const minutesElement = getByTestId('minutes-text')
+    const secondsElement = getByTestId('seconds-text')
+    expect(minutesElement.textContent).toBe('01')
+    expect(secondsElement.textContent).toBe('00')
 
     jest.useRealTimers()
   })
