@@ -27,6 +27,7 @@ export const enterFullScreen = (): void | null => {
     ;(docElement as any).mozRequestFullScreen()
   } else if ((docElement as any).webkitRequestFullscreen) {
     ;(docElement as any).webkitRequestFullscreen()
+    /* istanbul ignore next */
   } else if ((docElement as any).msRequestFullscreen) {
     ;(docElement as any).msRequestFullscreen()
   }
@@ -45,6 +46,7 @@ export const exitFullScreen = (): void | null => {
     doc.mozCancelFullScreen()
   } else if (doc.webkitExitFullscreen) {
     doc.webkitExitFullscreen()
+    /* istanbul ignore next */
   } else if (doc.msExitFullscreen) {
     doc.msExitFullscreen()
   }
