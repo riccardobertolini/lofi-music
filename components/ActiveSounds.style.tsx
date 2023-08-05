@@ -31,12 +31,18 @@ export const TimerText = styled.div`
   font-family: ${font};
   font-size: ${fontSize};
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const SoundsActiveText = styled.div`
   color: white;
   font-family: ${font};
   font-size: ${fontSize};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const StopAllButton = styled.button`
@@ -60,10 +66,10 @@ export const VolumeIcon = styled.span`
   width: 20px;
   height: 20px;
   display: block;
+  margin-left: auto;
   content: '';
   background-size: cover;
   background-repeat: no-repeat;
-  margin-right: 10px;
 `
 
 export const VolumeControl = styled.div`
