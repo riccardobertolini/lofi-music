@@ -7,7 +7,7 @@ import {
   StopAllButton,
   VolumeIcon,
   VolumeControl,
-  Row,
+  ControllerWrapper,
 } from './ActiveSounds.style'
 
 interface ActiveSoundsProps {
@@ -35,7 +35,7 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
 
   return (
     <ControlBar style={{ display: displayValue }}>
-      <Row>
+      <ControllerWrapper>
         <TimerText>
           <span data-testid="minutes-text">
             {minutes < 10 ? `0${minutes}` : minutes}
@@ -49,18 +49,18 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
         <StopAllButton onClick={stopAll} tabIndex={tabIndex}>
           Stop all
         </StopAllButton>
-      </Row>
-      <VolumeControl>
         <VolumeIcon />
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          onChange={handleMasterVolumeChange}
-          tabIndex={tabIndex}
-        />
-      </VolumeControl>
+        <VolumeControl>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={handleMasterVolumeChange}
+            tabIndex={tabIndex}
+          />
+        </VolumeControl>
+      </ControllerWrapper>
     </ControlBar>
   )
 }

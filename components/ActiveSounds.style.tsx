@@ -17,11 +17,13 @@ export const ControlBar = styled.div`
   backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+`
+
+export const ControllerWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 0.47fr 1fr 0.57fr;
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 4px;
 `
 
 export const TimerText = styled.div`
@@ -67,10 +69,4 @@ export const VolumeIcon = styled.span`
 export const VolumeControl = styled.div`
   display: flex;
   align-items: center;
-`
-
-export const Row = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
 `
