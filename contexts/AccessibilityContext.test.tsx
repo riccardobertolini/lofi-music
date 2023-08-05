@@ -11,6 +11,13 @@ const DummyComponent = () => {
 }
 
 describe('AccessibilityContext', () => {
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  beforeEach(() => {
+    jest.restoreAllMocks()
+  })
   it('should throw an error if useAccessibilityContext is used outside of the AccessibilityContextProvider', () => {
     // We need to catch the error in order to assert it, so we wrap the code inside a function
     const renderWithoutProvider = () => {

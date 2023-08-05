@@ -18,10 +18,6 @@ describe('Fullscreen function tests', () => {
       value: undefined,
       writable: true,
     })
-    Object.defineProperty(document, 'msExitFullscreen', {
-      value: undefined,
-      writable: true,
-    })
     Object.defineProperty(document.documentElement, 'requestFullscreen', {
       value: undefined,
       writable: true,
@@ -31,10 +27,6 @@ describe('Fullscreen function tests', () => {
       writable: true,
     })
     Object.defineProperty(document.documentElement, 'mozRequestFullScreen', {
-      value: undefined,
-      writable: true,
-    })
-    Object.defineProperty(document.documentElement, 'msRequestFullscreen', {
       value: undefined,
       writable: true,
     })
@@ -92,25 +84,6 @@ describe('Fullscreen function tests', () => {
       enterFullScreen()
       expect(webkitRequestFullscreen).toHaveBeenCalled()
     })
-
-    it('should call msRequestFullscreen when it exists and the others do not', () => {
-      const msRequestFullscreen = jest.fn()
-      Object.defineProperty(document.documentElement, 'mozRequestFullScreen', {
-        value: undefined,
-        writable: true,
-      })
-      Object.defineProperty(
-        document.documentElement,
-        'webkitRequestFullscreen',
-        { value: undefined, writable: true },
-      )
-      Object.defineProperty(document.documentElement, 'msRequestFullscreen', {
-        value: msRequestFullscreen,
-      })
-
-      enterFullScreen()
-      expect(msRequestFullscreen).toHaveBeenCalled()
-    })
   })
 
   it('exitFullScreen function calls the correct browser-specific method', async () => {
@@ -162,18 +135,15 @@ describe('Fullscreen function tests', () => {
       expect(webkitExitFullscreen).toHaveBeenCalled()
     })
 
-    it('should call msExitFullscreen when it exists and the others do not', () => {
-      const msExitFullscreen = jest.fn()
+    it('should call mozCancelFullScreen when it exists and the others do not', () => {
+      const mozCancelFullScreen = jest.fn()
       Object.defineProperty(document, 'mozCancelFullScreen', {
-        value: undefined,
+        value: mozCancelFullScreen,
         writable: true,
       })
       Object.defineProperty(document, 'webkitExitFullscreen', {
         value: undefined,
         writable: true,
-      })
-      Object.defineProperty(document, 'msExitFullscreen', {
-        value: msExitFullscreen,
       })
       Object.defineProperty(document, 'fullscreenElement', {
         value: {},
@@ -181,7 +151,7 @@ describe('Fullscreen function tests', () => {
       })
 
       exitFullScreen()
-      expect(msExitFullscreen).toHaveBeenCalled()
+      expect(mozCancelFullScreen).toHaveBeenCalled()
     })
   })
 })
