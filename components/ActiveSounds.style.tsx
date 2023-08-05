@@ -50,7 +50,7 @@ export const StopAllButton = styled.button`
   color: #fff;
   font-family: ${font};
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 6px 12px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
