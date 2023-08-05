@@ -16,6 +16,7 @@ export const ControlBar = styled.div`
   background-color: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 20px;
+  border: thin solid #d3d3d3;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 `
 
