@@ -16,12 +16,15 @@ export const ControlBar = styled.div`
   background-color: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 20px;
+  border: thin solid #d3d3d3;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+`
+
+export const ControllerWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 0.47fr 1fr 0.57fr;
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 4px;
 `
 
 export const TimerText = styled.div`
@@ -29,12 +32,18 @@ export const TimerText = styled.div`
   font-family: ${font};
   font-size: ${fontSize};
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const SoundsActiveText = styled.div`
   color: white;
   font-family: ${font};
   font-size: ${fontSize};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const StopAllButton = styled.button`
@@ -42,7 +51,7 @@ export const StopAllButton = styled.button`
   color: #fff;
   font-family: ${font};
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 6px 12px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -58,19 +67,13 @@ export const VolumeIcon = styled.span`
   width: 20px;
   height: 20px;
   display: block;
+  margin-left: auto;
   content: '';
   background-size: cover;
   background-repeat: no-repeat;
-  margin-right: 10px;
 `
 
 export const VolumeControl = styled.div`
   display: flex;
   align-items: center;
-`
-
-export const Row = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
 `
