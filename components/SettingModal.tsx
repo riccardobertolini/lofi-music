@@ -18,8 +18,13 @@ interface Color {
   gradient: string
   fallback: string
 }
-
+//linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% );
 const colors: Color[] = [
+  {
+    name: 'purple-pink',
+    gradient: 'linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% );',
+    fallback: '#ff1361',
+  },
   {
     name: 'cool blue',
     gradient: 'linear-gradient(to right, #2193b0, #6dd5ed)',
@@ -76,6 +81,8 @@ const SettingModal = () => {
     if (selectedColor) {
       document.documentElement.style.backgroundColor = selectedColor.fallback
       document.documentElement.style.backgroundImage = selectedColor.gradient
+    }else {
+      setSelectedColor(colors[0])
     }
   }, [selectedColor])
 
@@ -139,6 +146,8 @@ const SettingModal = () => {
                     tabIndex={0}
                     aria-label={color.name + ' as background'}
                     background={color.gradient}
+                    insideback={color === selectedColor ? "transparent" : "white"}
+                    textcolor={color === selectedColor ? "white" : "black"}
                   >
                     <div>{color.name}</div>
                   </ColorOption>
