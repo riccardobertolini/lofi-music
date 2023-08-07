@@ -60,6 +60,11 @@ export const StopAllButton = styled.button`
   &:hover {
     background-color: #ff69b4;
   }
+
+  @media (max-width: 650px) {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
 `
 
 export const VolumeIcon = styled.span`
