@@ -22,7 +22,7 @@ interface Color {
 const colors: Color[] = [
   {
     name: 'purple-pink',
-    gradient: 'linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% );',
+    gradient: 'linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% )',
     fallback: '#ff1361',
   },
   {

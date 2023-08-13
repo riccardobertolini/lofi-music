@@ -56,6 +56,7 @@ export const StopAllButton = styled.button`
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 
   &:hover {
     background-color: #ff69b4;
