@@ -21,10 +21,10 @@ export const ControlBar = styled.div`
 `
 
 export const ControllerWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.47fr 1fr 0.57fr;
-  grid-template-rows: repeat(2, auto);
-  grid-gap: 4px;
+  display: flex;
+  justify-items: center;
+  padding: 0.2rem;
+  gap: 1rem;
 `
 
 export const TimerText = styled.div`
@@ -44,6 +44,7 @@ export const SoundsActiveText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
 `
 
 export const StopAllButton = styled.button`
