@@ -18,6 +18,7 @@ module.exports = {
     '!**/pages/**',
     '!**/constants/**',
     '!**/.next/**',
+    '!**/*.style.{js,jsx,ts,tsx}',
     '!**/next.config.js',
     '!.prettierrc.js',
     '!**/jest.config.js',

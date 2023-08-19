@@ -60,7 +60,6 @@ export const TilePlayer = ({
 
   const togglePlay = () => {
     setPlaying((prevPlaying) => !prevPlaying)
-    // incrementActiveSounds(!playing)
   }
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +88,7 @@ export const TilePlayer = ({
             togglePlay()
           }
         }}
+        data-testid="togglePlayButton"
         tabIndex={tabIndex}
       >
         <Image width={300} height={300} src={imageSrc} alt="" />
@@ -107,6 +107,7 @@ export const TilePlayer = ({
         <StyledSlider
           min={0}
           max={1}
+          data-testid="sliderInput"
           step={0.01}
           value={progress}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -121,6 +122,7 @@ export const TilePlayer = ({
           min={0}
           max={1}
           step={0.01}
+          data-testid="effectiveSliderInput"
           value={volume}
           onChange={handleVolumeChange}
           tabIndex={tabIndex}
