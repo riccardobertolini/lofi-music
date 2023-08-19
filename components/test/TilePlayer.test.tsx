@@ -180,4 +180,32 @@ describe('TilePlayer', () => {
       expect(callback(false)).toBe(true)
     })
   })
+
+  it('toggles play state with key presses', () => {
+    const setPlaying = jest.fn()
+    // @ts-ignore
+    useStateMock.mockImplementation((init: any) => [init, setPlaying])
+
+    const { getByTestId } = render(
+      <AccessibilityContextProvider>
+        <TilePlayer {...props} />
+      </AccessibilityContextProvider>,
+    )
+
+    const button = getByTestId('togglePlayButton')
+
+    // Helper function to test keydown events
+    const testKeyPress = (key: string) => {
+      act(() => {
+        fireEvent.keyDown(button, { key: key })
+      })
+
+      expect(setPlaying).toHaveBeenCalledWith(expect.any(Function))
+
+      // Reset the mock to clear previous calls
+      setPlaying.mockClear()
+    }
+
+    ;[' ', 'Return', 'Enter'].forEach((key) => testKeyPress(key))
+  })
 })
