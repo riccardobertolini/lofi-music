@@ -59,4 +59,16 @@ export const musicList: { imageSrc: string; src: string }[] = [
     imageSrc: '/img/subway.jpg',
     src: '/audio/sorrow.mp3',
   },
+  {
+    imageSrc: '/img/campfire.jpg',
+    src: '/audio/campfire-crackling.mp3',
+  },
+  {
+    imageSrc: '/img/rain-roof.jpg',
+    src: '/audio/rain-on-roof.mp3',
+  },
+  {
+    imageSrc: '/img/wind-foliage.jpg',
+    src: '/audio/wind-foliage.mp3',
+  },
 ]
