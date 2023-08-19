@@ -202,7 +202,6 @@ describe('TilePlayer', () => {
 
       expect(setPlaying).toHaveBeenCalledWith(expect.any(Function))
 
-      // Reset the mock to clear previous calls
       setPlaying.mockClear()
     }
 
