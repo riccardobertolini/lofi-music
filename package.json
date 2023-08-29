@@ -29,7 +29,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.4",
-    "@types/node": "^20.4.1",
+    "@types/node": "^20.5.7",
     "@types/react": "^18.2.14",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-styled-components": "^2.1.4",
