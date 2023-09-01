@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Header, Footer, Title } from '@/components/App.style'
 import MusicTiles from '@/components/MusicTiles'
 import SettingModal from '@/components/SettingModal'
+import MoodModal from '@/components/MoodModal'
 import FullScreenMode from '@/components/FullScreenMode'
 import Shuffler from '@/components/Shuffler'
 import PrefetchImages from '@/components/PrefetchImages'
@@ -23,6 +24,7 @@ export default function Home() {
           totalTracks={musicList.length}
         />
         <SettingModal />
+        <MoodModal setRandomTracks={setRandomTracks} />
       </Header>
       <Title>
         Create your working{' '}
@@ -31,7 +33,11 @@ export default function Home() {
         </div>
       </Title>
 
-      <MusicTiles musicList={musicList} randomTracks={randomTracks} />
+      <MusicTiles
+        musicList={musicList}
+        randomTracks={randomTracks}
+        setRandomTracks={setRandomTracks}
+      />
       <Footer>
         <a
           href="https://github.com/riccardobertolini/lofi-music"
