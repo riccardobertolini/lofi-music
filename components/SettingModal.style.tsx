@@ -80,6 +80,35 @@ export const ColorOption = styled.div<ColorOptionProps>`
   }
 `
 
+export const MoodOption = styled.div<any>`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+  align-content: center;
+  justify-content: left;
+  cursor: pointer;
+  border: 1px solid #eee;
+  background: ${(props) => props.background};
+  border-radius: 40px;
+  min-width: 150px;
+  &:hover {
+    border: 1px solid black;
+  }
+
+  div {
+    padding: 10px;
+    background: ${(props) => props.insideback};
+    min-width: calc(100% - 20px);
+    text-transform: capitalize;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s;
+    border-radius: 40px;
+    text-align: center;
+    color: ${(props) => props.textcolor};
+  }
+`
 export const CloseButton = styled.span`
   position: absolute;
   top: 16px;
