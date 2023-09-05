@@ -14,17 +14,17 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.6",
+    "@mui/icons-material": "^5.14.7",
     "@mui/material": "^5.14.6",
     "next": "^13.4.19",
     "path": "~0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-player": "^2.12.0",
-    "styled-components": "^6.0.3"
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.22.5",
+    "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-typescript": "^7.22.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
