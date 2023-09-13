@@ -6,6 +6,7 @@ import ActiveSounds from './ActiveSounds'
 interface MusicTilesProp {
   musicList: Music[]
   randomTracks: number[]
+  setRandomTracks: (value: number[]) => void
 }
 
 type Music = {
@@ -13,7 +14,7 @@ type Music = {
   imageSrc: string
 }
 
-const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
+const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp) => {
   const [activeSounds, setActiveSounds] = useState(0)
   const [stopAllTrigger, doStopAllTrigger] = useState(0)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
@@ -53,7 +54,7 @@ const MusicTiles = ({ musicList, randomTracks }: MusicTilesProp) => {
 
   const stopAll = () => {
     doStopAllTrigger((prevStopAllTrigger) => prevStopAllTrigger + 1)
-    //setActiveSounds(0)
+    setRandomTracks([])
     setMinutes(0)
     setTimer(0)
   }
