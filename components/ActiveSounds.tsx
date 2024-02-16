@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react'
+import React, { FC, MouseEvent, useEffect, useState } from 'react'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import {
   ControlBar,
@@ -11,16 +11,12 @@ import {
 } from './ActiveSounds.style'
 
 interface ActiveSoundsProps {
-  timer: number
-  minutes: number
   activeSounds: number
   stopAll: (event: MouseEvent<HTMLButtonElement>) => void
   setMasterVolume: Function
 }
 
 const ActiveSounds: FC<ActiveSoundsProps> = ({
-  timer,
-  minutes,
   activeSounds,
   stopAll,
   setMasterVolume,
@@ -32,6 +28,41 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
     const newMasterVolume = parseFloat(e.target.value)
     setMasterVolume(newMasterVolume)
   }
+
+  const [timer, setTimer] = useState(0)
+  const [minutes, setMinutes] = useState(0)
+  const [isTimerRunning, setIsTimerRunning] = useState(false)
+
+  useEffect(() => {
+    if (activeSounds > 0 && !isTimerRunning) {
+      setIsTimerRunning(true)
+      setTimer(0)
+    } else if (activeSounds === 0 && isTimerRunning) {
+      setIsTimerRunning(false)
+    }
+  }, [activeSounds, isTimerRunning])
+
+
+  useEffect(() => {
+    let interval: NodeJS.Timer
+    if (isTimerRunning) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1)
+      }, 1000)
+    }
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [isTimerRunning])
+
+
+
+  if (timer == 60) {
+    setMinutes(minutes + 1)
+    setTimer(0)
+  }
+
 
   return (
     <ControlBar style={{ display: displayValue }}>
