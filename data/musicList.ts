@@ -1,4 +1,6 @@
-export const musicList: { imageSrc: string; src: string }[] = [
+import {MusicType} from '../types'
+
+export const musicList: MusicType[] = [
   {
     imageSrc: '/img/lofi.jpg',
     src: '/audio/empty-mind-118973.mp3',

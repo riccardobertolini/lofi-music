@@ -14,6 +14,11 @@ import { ReactPlayerProps } from 'react-player'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import './ActiveSounds'
 
+
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+import { handleTogglePlay } from "../store/lofiMusicReducer";
+
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 interface TilePlayerProps {
@@ -46,6 +51,10 @@ export const TilePlayer = ({
   const { tabIndex } = useAccessibilityContext()
   const playerRef = useRef<ReactPlayerProps>(null)
 
+
+  const dispatch = useDispatch<AppDispatch>()
+
+
   useEffect(() => {
     setPlaying(false)
   }, [stopAllTrigger])
@@ -60,6 +69,7 @@ export const TilePlayer = ({
 
   const togglePlay = () => {
     setPlaying((prevPlaying) => !prevPlaying)
+    dispatch(handleTogglePlay(src));
   }
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
