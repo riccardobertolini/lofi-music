@@ -36,6 +36,7 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
     if (activeSounds > 0 && !isTimerRunning) {
       setIsTimerRunning(true)
       setTimer(0)
+      setMinutes(0)
     } else if (activeSounds === 0 && isTimerRunning) {
       setIsTimerRunning(false)
     }
