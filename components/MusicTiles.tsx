@@ -16,13 +16,12 @@ interface MusicTilesProp {
 
 const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp) => {
   
-  const [masterVolume, setMasterVolume] = useState(1);
+ 
   const store = useSelector((state: RootState) => state.lofiMusic)
 
   return (
     <div>
-      <ActiveSounds
-        setMasterVolume={setMasterVolume} activeSounds={store.playing.length}      />
+      <ActiveSounds activeSounds={store.playing.length}      />
       <TilesContainer>
         {musicList.map((music: MusicType, index: number) => (
           <TilePlayer
@@ -30,7 +29,7 @@ const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp)
             src={music.src}
             key={music.src} 
             isPlaying={store.playing.findIndex((item)=>item==music.src)!=-1}
-            masterVolume={masterVolume}
+            masterVolume={store.masterVolume}
           />
         ))}
       </TilesContainer>

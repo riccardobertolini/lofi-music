@@ -4,10 +4,12 @@ import {createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {
   playing:string[],
+  masterVolume:number ,
   
 };
 const initialState: InitialStateType = {
   playing:[],
+  masterVolume:1,
  
 };
 
@@ -30,12 +32,15 @@ export const appLofiMusicSlice = createSlice({
     },
     handlestopAllTrigger:(state)=>{
       state.playing=[];
+    }, 
+    handleMasterVolume:(state, action)=>{
+      state.masterVolume=action.payload
     }
 
   },
 });
 
  
-export const { handleTogglePlay,handlestopAllTrigger } =
+export const { handleTogglePlay,handlestopAllTrigger,handleMasterVolume } =
   appLofiMusicSlice.actions;
 export default appLofiMusicSlice.reducer;

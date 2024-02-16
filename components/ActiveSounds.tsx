@@ -11,23 +11,21 @@ import {
 } from './ActiveSounds.style'
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
-import { handlestopAllTrigger } from "../store/lofiMusicReducer";
+import { handlestopAllTrigger, handleMasterVolume } from "../store/lofiMusicReducer";
 
 interface ActiveSoundsProps {
-  activeSounds: number 
-  setMasterVolume: Function
+  activeSounds: number  
 }
 
 const ActiveSounds: FC<ActiveSoundsProps> = ({
-  activeSounds, 
-  setMasterVolume,
+  activeSounds,  
 }) => {
   let displayValue = activeSounds ? 'block' : 'none'
   const { tabIndex } = useAccessibilityContext()
   const dispatch = useDispatch<AppDispatch>()
   const handleMasterVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMasterVolume = parseFloat(e.target.value)
-    setMasterVolume(newMasterVolume)
+    dispatch(handleMasterVolume(newMasterVolume))
   }
 
   const [timer, setTimer] = useState(0)
