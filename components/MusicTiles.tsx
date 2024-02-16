@@ -4,45 +4,32 @@ import { TilePlayer } from './TilePlayer'
 import ActiveSounds from './ActiveSounds'
 import {  RootState } from "../store";
 import { useSelector } from "react-redux";
+import { MusicType } from 'types';
 
 interface MusicTilesProp {
-  musicList: Music[]
+  musicList: MusicType[]
   randomTracks: number[]
   setRandomTracks: (value: number[]) => void
 }
 
-type Music = {
-  src: string
-  imageSrc: string
-}
+ 
 
 const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp) => {
   
   const [masterVolume, setMasterVolume] = useState(1);
   const store = useSelector((state: RootState) => state.lofiMusic)
 
-
-
-  const incrementActiveSounds = (playing: boolean) => {
-  
-  }
-
- 
- 
-   
-
   return (
     <div>
       <ActiveSounds
         setMasterVolume={setMasterVolume} activeSounds={store.playing.length}      />
       <TilesContainer>
-        {musicList.map((music: Music, index: number) => (
+        {musicList.map((music: MusicType, index: number) => (
           <TilePlayer
             imageSrc={music.imageSrc}
             src={music.src}
-            key={music.src}
-            incrementActiveSounds={incrementActiveSounds}
-            isPlaying={randomTracks.includes(index)}
+            key={music.src} 
+            isPlaying={store.playing.findIndex((item)=>item==music.src)!=-1}
             masterVolume={masterVolume}
           />
         ))}

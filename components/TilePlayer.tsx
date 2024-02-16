@@ -24,7 +24,6 @@ const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 interface TilePlayerProps {
   src: string
   imageSrc: string
-  incrementActiveSounds: (value: boolean) => void
   isPlaying: boolean
   masterVolume: number
 }
@@ -38,12 +37,11 @@ interface ProgressState {
 
 export const TilePlayer = ({
   src,
-  imageSrc,
-  incrementActiveSounds,
+  imageSrc, 
   isPlaying,
   masterVolume,
 }: TilePlayerProps) => {
-  const [playing, setPlaying] = useState(false)
+ 
   const [volume, setVolume] = useState(1)
   const [progress, setProgress] = useState(0)
   const { tabIndex } = useAccessibilityContext()
@@ -53,16 +51,9 @@ export const TilePlayer = ({
   const dispatch = useDispatch<AppDispatch>()
  
 
-  useEffect(() => {
-    isPlaying ? setPlaying(true) : setPlaying(false)
-  }, [isPlaying])
-
-  useEffect(() => {
-    incrementActiveSounds(playing)
-  }, [playing])
-
+ 
+ 
   const togglePlay = () => {
-    setPlaying((prevPlaying) => !prevPlaying)
     dispatch(handleTogglePlay(src));
   }
 
@@ -85,7 +76,7 @@ export const TilePlayer = ({
   return (
     <AudioPlayer>
       <ImageContainer
-        $status={playing}
+        $status={isPlaying}
         onClick={togglePlay}
         onKeyDown={(e: React.KeyboardEvent) => {
           if (e.key == ' ' || e.key == 'Return' || e.key == 'Enter') {
@@ -99,7 +90,7 @@ export const TilePlayer = ({
         <ReactPlayer
           ref={playerRef}
           url={src}
-          playing={playing}
+          playing={isPlaying}
           loop
           volume={volume * masterVolume}
           width={0}
