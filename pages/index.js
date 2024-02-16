@@ -23,11 +23,10 @@ export default function Home() {
         <Header>
           <FullScreenMode />
           <Shuffler
-            setRandomTracks={setRandomTracks}
             totalTracks={musicList.length}
           />
           <SettingModal />
-          <MoodModal setRandomTracks={setRandomTracks} />
+          <MoodModal />
         </Header>
         <Title>
           Create your working{' '}
@@ -38,8 +37,6 @@ export default function Home() {
 
         <MusicTiles
           musicList={musicList}
-          randomTracks={randomTracks}
-          setRandomTracks={setRandomTracks}
         />
         <Footer>
           <a

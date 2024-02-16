@@ -8,13 +8,12 @@ import { MusicType } from 'types';
 
 interface MusicTilesProp {
   musicList: MusicType[]
-  randomTracks: number[]
-  setRandomTracks: (value: number[]) => void
+
 }
 
  
 
-const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp) => {
+const MusicTiles = ({ musicList}: MusicTilesProp) => {
   
  
   const store = useSelector((state: RootState) => state.lofiMusic)
