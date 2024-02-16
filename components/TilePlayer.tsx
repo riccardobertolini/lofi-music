@@ -25,7 +25,6 @@ interface TilePlayerProps {
   src: string
   imageSrc: string
   incrementActiveSounds: (value: boolean) => void
-  stopAllTrigger: number
   isPlaying: boolean
   masterVolume: number
 }
@@ -41,7 +40,6 @@ export const TilePlayer = ({
   src,
   imageSrc,
   incrementActiveSounds,
-  stopAllTrigger,
   isPlaying,
   masterVolume,
 }: TilePlayerProps) => {
@@ -53,11 +51,7 @@ export const TilePlayer = ({
 
 
   const dispatch = useDispatch<AppDispatch>()
-
-
-  useEffect(() => {
-    setPlaying(false)
-  }, [stopAllTrigger])
+ 
 
   useEffect(() => {
     isPlaying ? setPlaying(true) : setPlaying(false)

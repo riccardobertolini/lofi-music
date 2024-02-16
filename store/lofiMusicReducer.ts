@@ -27,12 +27,15 @@ export const appLofiMusicSlice = createSlice({
       }
       state.playing=playing ;
 
+    },
+    handlestopAllTrigger:(state)=>{
+      state.playing=[];
     }
 
   },
 });
 
  
-export const { handleTogglePlay } =
+export const { handleTogglePlay,handlestopAllTrigger } =
   appLofiMusicSlice.actions;
 export default appLofiMusicSlice.reducer;

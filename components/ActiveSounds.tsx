@@ -9,21 +9,22 @@ import {
   VolumeControl,
   ControllerWrapper,
 } from './ActiveSounds.style'
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+import { handlestopAllTrigger } from "../store/lofiMusicReducer";
 
 interface ActiveSoundsProps {
-  activeSounds: number
-  stopAll: (event: MouseEvent<HTMLButtonElement>) => void
+  activeSounds: number 
   setMasterVolume: Function
 }
 
 const ActiveSounds: FC<ActiveSoundsProps> = ({
-  activeSounds,
-  stopAll,
+  activeSounds, 
   setMasterVolume,
 }) => {
   let displayValue = activeSounds ? 'block' : 'none'
   const { tabIndex } = useAccessibilityContext()
-
+  const dispatch = useDispatch<AppDispatch>()
   const handleMasterVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMasterVolume = parseFloat(e.target.value)
     setMasterVolume(newMasterVolume)
@@ -77,7 +78,7 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
           </span>
         </TimerText>
         <SoundsActiveText>Sounds active: {activeSounds}</SoundsActiveText>
-        <StopAllButton onClick={stopAll} tabIndex={tabIndex}>
+        <StopAllButton onClick={()=>dispatch(handlestopAllTrigger())} tabIndex={tabIndex}>
           Stop all
         </StopAllButton>
       </ControllerWrapper>

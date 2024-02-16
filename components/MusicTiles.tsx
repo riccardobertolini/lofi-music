@@ -18,8 +18,6 @@ type Music = {
 
 const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp) => {
   
-  const [stopAllTrigger, doStopAllTrigger] = useState(0)
-
   const [masterVolume, setMasterVolume] = useState(1);
   const store = useSelector((state: RootState) => state.lofiMusic)
 
@@ -29,19 +27,13 @@ const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp)
   
   }
 
-  const stopAll = () => {
-    doStopAllTrigger((prevStopAllTrigger) => prevStopAllTrigger + 1)
-    setRandomTracks([])
-    setMinutes(0)
-    setTimer(0)
-  }
+ 
  
    
 
   return (
     <div>
       <ActiveSounds
-        stopAll={stopAll}
         setMasterVolume={setMasterVolume} activeSounds={store.playing.length}      />
       <TilesContainer>
         {musicList.map((music: Music, index: number) => (
@@ -50,7 +42,6 @@ const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp)
             src={music.src}
             key={music.src}
             incrementActiveSounds={incrementActiveSounds}
-            stopAllTrigger={stopAllTrigger}
             isPlaying={randomTracks.includes(index)}
             masterVolume={masterVolume}
           />
