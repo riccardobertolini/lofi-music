@@ -1,16 +1,16 @@
 import React, { useState as useStateMock } from 'react'
-import { render, fireEvent, act , screen } from '@testing-library/react'
+import { render, fireEvent, act, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { store } from '../../store';
+import { store } from '../../store'
 import { TilePlayer } from '../TilePlayer'
 import { AccessibilityContextProvider } from '../../contexts/AccessibilityContext'
-import { Provider } from 'react-redux';
-import * as lofiMusicReducer from '../../store/lofiMusicReducer';
+import { Provider } from 'react-redux'
+import * as lofiMusicReducer from '../../store/lofiMusicReducer'
 
 type PropsType = {
   src: string
   imageSrc: string
- 
+
   isPlaying: boolean
   masterVolume: number
 }
@@ -44,18 +44,16 @@ describe('TilePlayer', () => {
   })
 
   afterEach(() => {
-    jest.clearAllMocks();
-    jest.clearAllTimers();
-    jest.useRealTimers();
-  });
- 
+    jest.clearAllMocks()
+    jest.clearAllTimers()
+    jest.useRealTimers()
+  })
 
-  const renderComponent = ( ) =>
+  const renderComponent = () =>
     render(
       <AccessibilityContextProvider>
         <Provider store={store}>
-        
-        <TilePlayer  {...props}        />
+          <TilePlayer {...props} />
         </Provider>
       </AccessibilityContextProvider>,
     )
@@ -146,24 +144,16 @@ describe('TilePlayer', () => {
   })
 
   it('toggles play state', () => {
-
- 
     const { getByTestId } = renderComponent()
     expect(store.getState().lofiMusic.playing.indexOf(props.src)).not.toBe(-1)
     const button = getByTestId('togglePlayButton')
     fireEvent.click(button)
 
     expect(store.getState().lofiMusic.playing.indexOf(props.src)).toBe(-1)
- 
-
- 
   })
 
   it('toggles play state with key presses', () => {
-  
-  
-    const handleTogglePlay = jest.spyOn(lofiMusicReducer, 'handleTogglePlay');
-   
+    const handleTogglePlay = jest.spyOn(lofiMusicReducer, 'handleTogglePlay')
 
     const { getByTestId } = renderComponent()
 
@@ -177,13 +167,10 @@ describe('TilePlayer', () => {
 
       expect(handleTogglePlay).toHaveBeenCalled()
       jest.clearAllMocks()
-
-       
     }
 
     ;[' ', 'Return', 'Enter'].forEach((key) => testKeyPress(key))
   })
-
 
   // it('should not toggles play state  on other key press', () => {
   //   fireEvent.keyDown(screen.getByLabelText('shuffle random tracks'), {

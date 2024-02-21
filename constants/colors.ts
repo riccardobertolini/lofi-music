@@ -8,5 +8,5 @@ export enum MuiVariants {
 
 export enum ColorCodes {
   WHITE = '#ffff',
-  BLACK = '#000'
+  BLACK = '#000',
 }

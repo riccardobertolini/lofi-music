@@ -2,42 +2,36 @@ import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import Shuffler from './../Shuffler'
 import AccessibilityContextProvider from '../../contexts/AccessibilityContext'
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import * as lofiMusicReducer from '../../store/lofiMusicReducer';
+import { Provider } from 'react-redux'
+import configureStore from 'redux-mock-store'
+import * as lofiMusicReducer from '../../store/lofiMusicReducer'
 
-const mockStore = configureStore([]);
-const setRandomTracksMock = jest.spyOn(lofiMusicReducer, 'handleSetMusic');
+const mockStore = configureStore([])
+const setRandomTracksMock = jest.spyOn(lofiMusicReducer, 'handleSetMusic')
 describe('Shuffler Component', () => {
-  let store: any;
-   
+  let store: any
 
   beforeEach(() => {
-  
-
     store = mockStore({
       lofiMusic: {
         playing: [],
         masterVolume: 1,
-      }
-
-    });
+      },
+    })
     render(
       <Provider store={store}>
-
         <AccessibilityContextProvider>
-          <Shuffler   totalTracks={10} />
+          <Shuffler totalTracks={10} />
         </AccessibilityContextProvider>
       </Provider>,
     )
-  
   })
 
-  afterEach(() => { 
-    jest.clearAllMocks();
-    jest.clearAllTimers();
-    jest.useRealTimers();
-  });
+  afterEach(() => {
+    jest.clearAllMocks()
+    jest.clearAllTimers()
+    jest.useRealTimers()
+  })
 
   it('should call setRandomTracks when the shuffle icon is clicked', () => {
     const shuffleIcon = screen.getByLabelText('shuffle random tracks')

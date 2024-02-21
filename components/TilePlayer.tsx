@@ -14,10 +14,9 @@ import { ReactPlayerProps } from 'react-player'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import './ActiveSounds'
 
-
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
-import { handleTogglePlay } from "../store/lofiMusicReducer";
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import { handleTogglePlay } from '../store/lofiMusicReducer'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
@@ -37,24 +36,19 @@ interface ProgressState {
 
 export const TilePlayer = ({
   src,
-  imageSrc, 
+  imageSrc,
   isPlaying,
   masterVolume,
 }: TilePlayerProps) => {
- 
   const [volume, setVolume] = useState(1)
   const [progress, setProgress] = useState(0)
   const { tabIndex } = useAccessibilityContext()
   const playerRef = useRef<ReactPlayerProps>(null)
 
-
   const dispatch = useDispatch<AppDispatch>()
- 
 
- 
- 
   const togglePlay = () => {
-    dispatch(handleTogglePlay(src));
+    dispatch(handleTogglePlay(src))
   }
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {

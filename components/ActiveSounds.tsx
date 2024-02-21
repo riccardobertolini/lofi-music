@@ -9,17 +9,18 @@ import {
   VolumeControl,
   ControllerWrapper,
 } from './ActiveSounds.style'
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
-import { handlestopAllTrigger, handleMasterVolume } from "../store/lofiMusicReducer";
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import {
+  handlestopAllTrigger,
+  handleMasterVolume,
+} from '../store/lofiMusicReducer'
 
 interface ActiveSoundsProps {
-  activeSounds: number  
+  activeSounds: number
 }
 
-const ActiveSounds: FC<ActiveSoundsProps> = ({
-  activeSounds,  
-}) => {
+const ActiveSounds: FC<ActiveSoundsProps> = ({ activeSounds }) => {
   let displayValue = activeSounds ? 'block' : 'none'
   const { tabIndex } = useAccessibilityContext()
   const dispatch = useDispatch<AppDispatch>()
@@ -42,7 +43,6 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
     }
   }, [activeSounds, isTimerRunning])
 
-
   useEffect(() => {
     let interval: NodeJS.Timer
     if (isTimerRunning) {
@@ -56,13 +56,10 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
     }
   }, [isTimerRunning])
 
-
-
   if (timer == 60) {
     setMinutes(minutes + 1)
     setTimer(0)
   }
-
 
   return (
     <ControlBar style={{ display: displayValue }}>
@@ -77,23 +74,26 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
           </span>
         </TimerText>
         <SoundsActiveText>Sounds active: {activeSounds}</SoundsActiveText>
-        <StopAllButton onClick={()=>dispatch(handlestopAllTrigger())} tabIndex={tabIndex}>
+        <StopAllButton
+          onClick={() => dispatch(handlestopAllTrigger())}
+          tabIndex={tabIndex}
+        >
           Stop all
         </StopAllButton>
       </ControllerWrapper>
-      <ControllerWrapper style={{justifyContent: "center"}}>
+      <ControllerWrapper style={{ justifyContent: 'center' }}>
         <VolumeControl>
-            <VolumeIcon />
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.01}
-              onChange={handleMasterVolumeChange}
-              tabIndex={tabIndex}
-            />
-          </VolumeControl>
-        </ControllerWrapper>
+          <VolumeIcon />
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={handleMasterVolumeChange}
+            tabIndex={tabIndex}
+          />
+        </VolumeControl>
+      </ControllerWrapper>
     </ControlBar>
   )
 }

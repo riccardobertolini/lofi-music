@@ -1,1 +1,1 @@
-export type MusicType = { imageSrc: string; src: string };
+export type MusicType = { imageSrc: string; src: string }
