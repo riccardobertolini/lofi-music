@@ -43,10 +43,9 @@ export const BackgroundColorWidget = styled.div`
   }
 `
 interface ColorOptionProps {
-  background: string,
-  insideback:string,
-  textcolor:string
-  
+  background: string
+  insideback: string
+  textcolor: string
 }
 export const ColorOption = styled.div<ColorOptionProps>`
   display: flex;
@@ -72,7 +71,7 @@ export const ColorOption = styled.div<ColorOptionProps>`
     border-radius: 40px;
     text-align: center;
     color: ${(props) => props.textcolor};
-    
+
     &:hover {
       background: transparent;
       color: white;

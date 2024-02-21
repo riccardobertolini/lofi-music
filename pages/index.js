@@ -10,21 +10,18 @@ import { musicList } from '@/data/musicList'
 
 import { useAccessibilityContext } from '@/contexts/AccessibilityContext'
 import { Provider } from 'react-redux'
-import { store } from "../store";
+import { store } from '../store'
 export default function Home() {
   const [randomTracks, setRandomTracks] = useState([])
   const { tabIndex } = useAccessibilityContext()
 
   return (
-
     <Provider store={store}>
       <div className="mainWrapper">
         <PrefetchImages />
         <Header>
           <FullScreenMode />
-          <Shuffler
-            totalTracks={musicList.length}
-          />
+          <Shuffler totalTracks={musicList.length} />
           <SettingModal />
           <MoodModal />
         </Header>
@@ -35,9 +32,7 @@ export default function Home() {
           </div>
         </Title>
 
-        <MusicTiles
-          musicList={musicList}
-        />
+        <MusicTiles musicList={musicList} />
         <Footer>
           <a
             href="https://github.com/riccardobertolini/lofi-music"
@@ -48,7 +43,7 @@ export default function Home() {
           <br />
           using React18, TypeScript & Vite
         </Footer>
-      </div> 
+      </div>
     </Provider>
   )
 }

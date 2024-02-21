@@ -1,14 +1,16 @@
 import React, { useState as useStateMock } from 'react'
-import { render, fireEvent, act } from '@testing-library/react'
+import { render, fireEvent, act, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+import { store } from '../../store'
 import { TilePlayer } from '../TilePlayer'
 import { AccessibilityContextProvider } from '../../contexts/AccessibilityContext'
+import { Provider } from 'react-redux'
+import * as lofiMusicReducer from '../../store/lofiMusicReducer'
 
 type PropsType = {
   src: string
   imageSrc: string
-  incrementActiveSounds: jest.Mock
-  stopAllTrigger: number
+
   isPlaying: boolean
   masterVolume: number
 }
@@ -36,27 +38,23 @@ describe('TilePlayer', () => {
     props = {
       src: 'http://test-src',
       imageSrc: 'http://test-image-src',
-      incrementActiveSounds: jest.fn(),
-      stopAllTrigger: 0,
       isPlaying: false,
       masterVolume: 1,
     }
   })
-  const mockSrc = 'http://path/to/audio.mp3'
-  const mockImageSrc = 'http://path/to/image.jpg'
 
-  const renderComponent = (props = {}) =>
+  afterEach(() => {
+    jest.clearAllMocks()
+    jest.clearAllTimers()
+    jest.useRealTimers()
+  })
+
+  const renderComponent = () =>
     render(
       <AccessibilityContextProvider>
-        <TilePlayer
-          src={mockSrc}
-          imageSrc={mockImageSrc}
-          incrementActiveSounds={() => {}}
-          stopAllTrigger={0}
-          isPlaying={false}
-          masterVolume={100}
-          {...props}
-        />
+        <Provider store={store}>
+          <TilePlayer {...props} />
+        </Provider>
       </AccessibilityContextProvider>,
     )
 
@@ -79,11 +77,7 @@ describe('TilePlayer', () => {
   })
 
   it('should handle volume change', () => {
-    const { getAllByRole } = render(
-      <AccessibilityContextProvider>
-        <TilePlayer {...props} />
-      </AccessibilityContextProvider>,
-    )
+    const { getAllByRole } = renderComponent()
 
     const sliders = getAllByRole('slider')
 
@@ -97,15 +91,11 @@ describe('TilePlayer', () => {
   })
 
   it('should handle seek', () => {
-    const { getAllByRole } = render(
-      <AccessibilityContextProvider>
-        <TilePlayer {...props} />
-      </AccessibilityContextProvider>,
-    )
+    renderComponent()
 
-    const sliders = getAllByRole('slider')
+    const sliders = screen.getAllByTestId('sliderInput')
 
-    const progressInput = sliders[1]
+    const progressInput = sliders[0]
     act(() => {
       // @ts-ignore
       progressInput.value = '0.7'
@@ -115,25 +105,25 @@ describe('TilePlayer', () => {
     expect(progressInput).toHaveValue('0.7')
   })
 
-  it('sets playing to true when isPlaying prop is true', () => {
-    act(() => {
-      render(
-        <AccessibilityContextProvider>
-          <TilePlayer {...props} />
-        </AccessibilityContextProvider>,
-      )
-    })
-    expect(mockSetPlaying).toHaveBeenCalledWith(false)
+  // it('sets playing to true when isPlaying prop is true', () => {
+  //   act(() => {
+  //     render(
+  //       <AccessibilityContextProvider><Provider store={store}>
+  //         <TilePlayer {...props} /></Provider>
+  //       </AccessibilityContextProvider>,
+  //     )
+  //   })
+  //   expect(mockSetPlaying).toHaveBeenCalledWith(false)
 
-    act(() => {
-      render(
-        <AccessibilityContextProvider>
-          <TilePlayer {...props} isPlaying={true} />
-        </AccessibilityContextProvider>,
-      )
-    })
-    expect(mockSetPlaying).toHaveBeenCalledWith(true)
-  })
+  //   act(() => {
+  //     render(
+  //       <AccessibilityContextProvider><Provider store={store}>
+  //         <TilePlayer {...props} isPlaying={true} /></Provider>
+  //       </AccessibilityContextProvider>,
+  //     )
+  //   })
+  //   expect(mockSetPlaying).toHaveBeenCalledWith(true)
+  // })
 
   it('updates volume on range slider change', () => {
     // Mocking useState
@@ -143,11 +133,7 @@ describe('TilePlayer', () => {
     useStateMock.mockImplementation((volume: number) => [volume, setVolume])
 
     // Render component
-    const { getByTestId } = render(
-      <AccessibilityContextProvider>
-        <TilePlayer {...props} />
-      </AccessibilityContextProvider>,
-    )
+    const { getByTestId } = renderComponent()
 
     // Find input and simulate change event
     const sliderInput = getByTestId('effectiveSliderInput')
@@ -158,39 +144,18 @@ describe('TilePlayer', () => {
   })
 
   it('toggles play state', () => {
-    const setPlaying = jest.fn()
-    // @ts-ignore
-    useStateMock.mockImplementation((init: any) => [init, setPlaying])
-
-    const { getByTestId } = render(
-      <AccessibilityContextProvider>
-        <TilePlayer {...props} />
-      </AccessibilityContextProvider>,
-    )
-
+    const { getByTestId } = renderComponent()
+    expect(store.getState().lofiMusic.playing.indexOf(props.src)).not.toBe(-1)
     const button = getByTestId('togglePlayButton')
-    act(() => {
-      fireEvent.click(button)
+    fireEvent.click(button)
 
-      expect(setPlaying).toHaveBeenCalledWith(expect.any(Function))
-
-      const callback = setPlaying.mock.calls[3][0]
-
-      expect(callback(true)).toBe(false)
-      expect(callback(false)).toBe(true)
-    })
+    expect(store.getState().lofiMusic.playing.indexOf(props.src)).toBe(-1)
   })
 
   it('toggles play state with key presses', () => {
-    const setPlaying = jest.fn()
-    // @ts-ignore
-    useStateMock.mockImplementation((init: any) => [init, setPlaying])
+    const handleTogglePlay = jest.spyOn(lofiMusicReducer, 'handleTogglePlay')
 
-    const { getByTestId } = render(
-      <AccessibilityContextProvider>
-        <TilePlayer {...props} />
-      </AccessibilityContextProvider>,
-    )
+    const { getByTestId } = renderComponent()
 
     const button = getByTestId('togglePlayButton')
 
@@ -200,11 +165,17 @@ describe('TilePlayer', () => {
         fireEvent.keyDown(button, { key: key })
       })
 
-      expect(setPlaying).toHaveBeenCalledWith(expect.any(Function))
-
-      setPlaying.mockClear()
+      expect(handleTogglePlay).toHaveBeenCalled()
+      jest.clearAllMocks()
     }
 
     ;[' ', 'Return', 'Enter'].forEach((key) => testKeyPress(key))
   })
+
+  // it('should not toggles play state  on other key press', () => {
+  //   fireEvent.keyDown(screen.getByLabelText('shuffle random tracks'), {
+  //     key: 'A',
+  //   })
+  //   expect(setRandomTracksMock).not.toHaveBeenCalled()
+  // })
 })

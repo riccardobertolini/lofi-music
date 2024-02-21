@@ -1,24 +1,31 @@
 import React from 'react'
-import { render, fireEvent, act } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import MusicTiles from './../MusicTiles'
-import AccessibilityContextProvider from '../../contexts/AccessibilityContext'
+import { Provider } from 'react-redux'
+import { store } from '../../store'
 
-jest.mock('./../TilePlayer', () => {
+jest.mock('react-player/lazy', () => {
   return {
-    TilePlayer: jest.fn(({ incrementActiveSounds, isPlaying }) => (
-      <div
-        onClick={() => incrementActiveSounds(isPlaying)}
-        data-testid="tileplayer"
-      >
-        TilePlayer
-      </div>
-    )),
+    __esModule: true,
+    default: jest.fn(() => <div>ReactPlayer</div>),
   }
 })
 
+jest.mock('../../contexts/AccessibilityContext', () => ({
+  useAccessibilityContext: jest
+    .fn()
+    .mockImplementation(() => ({ tabIndex: 0 })),
+}))
+
 const musicList = [
-  { src: 'track1.mp3', imageSrc: 'image1.jpg' },
-  { src: 'track2.mp3', imageSrc: 'image2.jpg' },
+  {
+    imageSrc: '/img/lofi.jpg',
+    src: '/audio/empty-mind-118973.mp3',
+  },
+  {
+    imageSrc: '/img/forest.jpg',
+    src: '/audio/forest_sounds.mp3',
+  },
 ]
 
 describe('MusicTiles', () => {
@@ -30,50 +37,58 @@ describe('MusicTiles', () => {
 
   it('renders without crashing', () => {
     render(
-      <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
-      </AccessibilityContextProvider>,
+      <Provider store={store}>
+        <MusicTiles musicList={musicList} />
+      </Provider>,
     )
   })
 
   it('increments and decrements active sounds', () => {
-    const { getAllByTestId, getByText } = render(
-      <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
-      </AccessibilityContextProvider>,
+    render(
+      <Provider store={store}>
+        <MusicTiles musicList={musicList} />
+      </Provider>,
     )
-    const tilePlayers = getAllByTestId('tileplayer')
+    const tilePlayers = screen.getAllByTestId('togglePlayButton')
 
+    expect(screen.getByText('Sounds active: 0')).toBeInTheDocument()
     fireEvent.click(tilePlayers[0])
-    expect(getByText('Sounds active: 1')).toBeInTheDocument()
+
+    expect(screen.getByText('Sounds active: 1')).toBeInTheDocument()
 
     fireEvent.click(tilePlayers[1])
-    expect(getByText('Sounds active: 0')).toBeInTheDocument()
+    expect(screen.getByText('Sounds active: 2')).toBeInTheDocument()
+    fireEvent.click(tilePlayers[0])
+    fireEvent.click(tilePlayers[1])
+    expect(screen.getByText('Sounds active: 0')).toBeInTheDocument()
   })
 
   it('stops all sounds', () => {
-    const { getByText } = render(
-      <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
-      </AccessibilityContextProvider>,
+    render(
+      <Provider store={store}>
+        <MusicTiles musicList={musicList} />
+      </Provider>,
     )
-    const stopAllButton = getByText('Stop all')
-
+    const tilePlayers = screen.getAllByTestId('togglePlayButton')
+    fireEvent.click(tilePlayers[0])
+    fireEvent.click(tilePlayers[1])
+    expect(screen.getByText('Sounds active: 2')).toBeInTheDocument()
+    const stopAllButton = screen.getByText('Stop all')
     fireEvent.click(stopAllButton)
-    expect(getByText('Sounds active: 0')).toBeInTheDocument()
+    expect(screen.getByText('Sounds active: 0')).toBeInTheDocument()
   })
 
   it('updates minutes and resets timer when timer reaches 60', () => {
     jest.useFakeTimers()
 
-    const { getAllByTestId, getByTestId } = render(
-      <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
-      </AccessibilityContextProvider>,
+    render(
+      <Provider store={store}>
+        <MusicTiles musicList={musicList} />
+      </Provider>,
     )
 
     // Assume the incrementActiveSounds is called, starts timer
-    const tilePlayers = getAllByTestId('tileplayer')
+    const tilePlayers = screen.getAllByTestId('togglePlayButton')
     fireEvent.click(tilePlayers[0])
 
     // Simulate 60 seconds passing
@@ -82,8 +97,8 @@ describe('MusicTiles', () => {
     })
 
     // The state should be 1 minute and 0 seconds
-    const minutesElement = getByTestId('minutes-text')
-    const secondsElement = getByTestId('seconds-text')
+    const minutesElement = screen.getByTestId('minutes-text')
+    const secondsElement = screen.getByTestId('seconds-text')
     expect(minutesElement.textContent).toBe('01')
     expect(secondsElement.textContent).toBe('00')
 

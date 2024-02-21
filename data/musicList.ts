@@ -1,4 +1,4 @@
-import {MusicType} from '../types'
+import { MusicType } from '../types'
 
 export const musicList: MusicType[] = [
   {

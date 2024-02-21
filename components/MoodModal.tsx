@@ -13,9 +13,9 @@ import IconButton from './IconButton'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import { MuiVariants } from '../constants/colors'
 import { musicList } from '../data/musicList'
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
-import { handleSetMusic } from "../store/lofiMusicReducer";
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import { handleSetMusic } from '../store/lofiMusicReducer'
 
 interface MoodOptions {
   name: string
@@ -34,7 +34,7 @@ const moodOptions: MoodOptions[] = [
   {
     name: 'Summer camping',
     sources: ['/audio/forest_sounds.mp3', '/audio/campfire-crackling.mp3'],
-  }
+  },
 ]
 
 const MoodModal = () => {
@@ -67,12 +67,15 @@ const MoodModal = () => {
     }
   }, [])
 
-  const handleMoodChange = (sources: string[]) : void => {
-    const uniqueArray : string[] = [];
-    sources.forEach(source => {
-      musicList.forEach((musicListItem, index) => source === musicListItem.src && uniqueArray.push(musicListItem.src));
-    });
-    uniqueArray.length > 0 && dispatch(handleSetMusic(uniqueArray));
+  const handleMoodChange = (sources: string[]): void => {
+    const uniqueArray: string[] = []
+    sources.forEach((source) => {
+      musicList.forEach(
+        (musicListItem, index) =>
+          source === musicListItem.src && uniqueArray.push(musicListItem.src),
+      )
+    })
+    uniqueArray.length > 0 && dispatch(handleSetMusic(uniqueArray))
   }
 
   return (
