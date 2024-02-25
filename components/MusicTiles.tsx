@@ -14,13 +14,17 @@ type Music = {
   imageSrc: string
 }
 
-const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp) => {
+const MusicTiles = ({
+  musicList,
+  randomTracks,
+  setRandomTracks,
+}: MusicTilesProp) => {
   const [activeSounds, setActiveSounds] = useState(0)
   const [stopAllTrigger, doStopAllTrigger] = useState(0)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
   const [timer, setTimer] = useState(0)
   const [minutes, setMinutes] = useState(0)
-  const [masterVolume, setMasterVolume] = useState(1);
+  const [masterVolume, setMasterVolume] = useState(1)
 
   useEffect(() => {
     if (activeSounds > 0 && !isTimerRunning) {
@@ -40,7 +44,7 @@ const MusicTiles = ({ musicList, randomTracks, setRandomTracks}: MusicTilesProp)
     }
 
     return () => {
-      clearInterval(interval)
+      clearInterval(interval as unknown as number)
     }
   }, [isTimerRunning])
 

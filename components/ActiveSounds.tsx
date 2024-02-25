@@ -50,19 +50,19 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
           Stop all
         </StopAllButton>
       </ControllerWrapper>
-      <ControllerWrapper style={{justifyContent: "center"}}>
+      <ControllerWrapper style={{ justifyContent: 'center' }}>
         <VolumeControl>
-            <VolumeIcon />
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.01}
-              onChange={handleMasterVolumeChange}
-              tabIndex={tabIndex}
-            />
-          </VolumeControl>
-        </ControllerWrapper>
+          <VolumeIcon />
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={handleMasterVolumeChange}
+            tabIndex={tabIndex}
+          />
+        </VolumeControl>
+      </ControllerWrapper>
     </ControlBar>
   )
 }

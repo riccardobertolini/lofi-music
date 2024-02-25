@@ -13,7 +13,7 @@ const IconButton = ({
   onClick,
   children,
 }: IconButtonProps) => {
-  const {tabIndex} = useAccessibilityContext();
+  const { tabIndex } = useAccessibilityContext()
   return (
     <ButtonStyled type={type} onClick={onClick} tabIndex={tabIndex}>
       {children}
