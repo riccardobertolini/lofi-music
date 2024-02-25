@@ -44,7 +44,7 @@ const MusicTiles = ({
     }
 
     return () => {
-      clearInterval(interval)
+      clearInterval(interval as unknown as number)
     }
   }, [isTimerRunning])
 
