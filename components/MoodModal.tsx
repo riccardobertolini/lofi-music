@@ -31,10 +31,14 @@ const moodOptions: MoodOptions[] = [
   {
     name: 'Summer camping',
     sources: ['/audio/forest_sounds.mp3', '/audio/campfire-crackling.mp3'],
-  }
+  },
 ]
 
-const MoodModal = ({ setRandomTracks }: { setRandomTracks: (value: number[]) => void }) => {
+const MoodModal = ({
+  setRandomTracks,
+}: {
+  setRandomTracks: (value: number[]) => void
+}) => {
   const { setModalVisible } = useAccessibilityContext()
   const ModalRef = useRef(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -63,12 +67,15 @@ const MoodModal = ({ setRandomTracks }: { setRandomTracks: (value: number[]) => 
     }
   }, [])
 
-  const handleMoodChange = (sources: string[]) : void => {
-    const uniqueArray : number[] = [];
-    sources.forEach(source => {
-      musicList.forEach((musicListItem, index) => source === musicListItem.src && uniqueArray.push(index));
-    });
-    uniqueArray.length > 0 && setRandomTracks(uniqueArray);
+  const handleMoodChange = (sources: string[]): void => {
+    const uniqueArray: number[] = []
+    sources.forEach((source) => {
+      musicList.forEach(
+        (musicListItem, index) =>
+          source === musicListItem.src && uniqueArray.push(index),
+      )
+    })
+    uniqueArray.length > 0 && setRandomTracks(uniqueArray)
   }
 
   return (

@@ -3,7 +3,7 @@ module.exports = {
     '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
   },
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },

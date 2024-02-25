@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   .shuffler {
@@ -7,7 +7,7 @@ export const Container = styled.div`
     cursor: pointer;
     color: #fff;
     position: relative;
-    content: "";
+    content: '';
     background-size: contain;
     background-image: url('/img/shuffle.png');
     display: block;
@@ -20,4 +20,4 @@ export const Container = styled.div`
       width: 35px;
     }
   }
-`;
+`

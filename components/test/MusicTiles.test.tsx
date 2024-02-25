@@ -31,7 +31,11 @@ describe('MusicTiles', () => {
   it('renders without crashing', () => {
     render(
       <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
+        <MusicTiles
+          musicList={musicList}
+          randomTracks={[0]}
+          setRandomTracks={() => {}}
+        />
       </AccessibilityContextProvider>,
     )
   })
@@ -39,7 +43,11 @@ describe('MusicTiles', () => {
   it('increments and decrements active sounds', () => {
     const { getAllByTestId, getByText } = render(
       <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
+        <MusicTiles
+          musicList={musicList}
+          randomTracks={[0]}
+          setRandomTracks={() => {}}
+        />
       </AccessibilityContextProvider>,
     )
     const tilePlayers = getAllByTestId('tileplayer')
@@ -54,7 +62,11 @@ describe('MusicTiles', () => {
   it('stops all sounds', () => {
     const { getByText } = render(
       <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
+        <MusicTiles
+          musicList={musicList}
+          randomTracks={[0]}
+          setRandomTracks={() => {}}
+        />
       </AccessibilityContextProvider>,
     )
     const stopAllButton = getByText('Stop all')
@@ -68,7 +80,11 @@ describe('MusicTiles', () => {
 
     const { getAllByTestId, getByTestId } = render(
       <AccessibilityContextProvider>
-        <MusicTiles musicList={musicList} randomTracks={[0]} />
+        <MusicTiles
+          musicList={musicList}
+          randomTracks={[0]}
+          setRandomTracks={() => {}}
+        />
       </AccessibilityContextProvider>,
     )
 

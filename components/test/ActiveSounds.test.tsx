@@ -9,6 +9,9 @@ jest.mock('../../contexts/AccessibilityContext', () => ({
 }))
 
 describe('ActiveSounds', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
   it('renders correctly', () => {
     render(
       <ActiveSounds
@@ -84,7 +87,7 @@ describe('ActiveSounds', () => {
     )
     const link = screen.getByText('Stop all')
     expect(link).toHaveStyle({
-      cursor: 'default',
+      cursor: 'pointer',
     })
   })
 

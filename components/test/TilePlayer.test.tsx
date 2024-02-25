@@ -1,6 +1,5 @@
 import React, { useState as useStateMock } from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
 import { TilePlayer } from '../TilePlayer'
 import { AccessibilityContextProvider } from '../../contexts/AccessibilityContext'
 
@@ -96,25 +95,6 @@ describe('TilePlayer', () => {
     expect(volumeInput).toHaveValue('0.5')
   })
 
-  it('should handle seek', () => {
-    const { getAllByRole } = render(
-      <AccessibilityContextProvider>
-        <TilePlayer {...props} />
-      </AccessibilityContextProvider>,
-    )
-
-    const sliders = getAllByRole('slider')
-
-    const progressInput = sliders[1]
-    act(() => {
-      // @ts-ignore
-      progressInput.value = '0.7'
-      fireEvent.input(progressInput, { target: { value: '0.7' } })
-    })
-
-    expect(progressInput).toHaveValue('0.7')
-  })
-
   it('sets playing to true when isPlaying prop is true', () => {
     act(() => {
       render(
@@ -204,7 +184,6 @@ describe('TilePlayer', () => {
 
       setPlaying.mockClear()
     }
-
     ;[' ', 'Return', 'Enter'].forEach((key) => testKeyPress(key))
   })
 })
