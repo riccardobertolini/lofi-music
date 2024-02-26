@@ -50,7 +50,6 @@ export const Subheading = styled.div`
     background: #800080;
     display: inline-block;
     font-size: 0.7em;
-    text-decoration: underline;
     cursor: pointer;
     transition: color 0.5s ease;
     color: #fff;

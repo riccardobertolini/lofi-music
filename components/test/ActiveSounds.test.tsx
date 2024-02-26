@@ -121,7 +121,9 @@ describe('ActiveSounds', () => {
       </Provider>,
     )
     const link = screen.getByText('Stop all')
-    expect(link).not.toBeVisible()
+    expect(link).toHaveStyle({
+      cursor: 'default',
+    })
   })
 
   it('shows the link when activeSounds is greater than 0', () => {

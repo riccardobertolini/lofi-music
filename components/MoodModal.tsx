@@ -34,7 +34,7 @@ const moodOptions: MoodOptions[] = [
   {
     name: 'Summer camping',
     sources: ['/audio/forest_sounds.mp3', '/audio/campfire-crackling.mp3'],
-  },
+  }
 ]
 
 const MoodModal = () => {

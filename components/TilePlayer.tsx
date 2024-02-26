@@ -89,6 +89,7 @@ export const TilePlayer = ({
           volume={volume * masterVolume}
           width={0}
           height={0}
+          data-testid="reactPlayer"
           onProgress={handleProgress}
         />
       </ImageContainer>
