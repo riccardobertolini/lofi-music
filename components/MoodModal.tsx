@@ -71,7 +71,7 @@ const MoodModal = () => {
     const uniqueArray: string[] = []
     sources.forEach((source) => {
       musicList.forEach(
-        (musicListItem, index) =>
+        (musicListItem) =>
           source === musicListItem.src && uniqueArray.push(musicListItem.src),
       )
     })

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { TilesContainer } from './App.style'
 import { TilePlayer } from './TilePlayer'
 import ActiveSounds from './ActiveSounds'
@@ -17,7 +17,7 @@ const MusicTiles = ({ musicList }: MusicTilesProp) => {
     <div>
       <ActiveSounds activeSounds={store.playing.length} />
       <TilesContainer>
-        {musicList.map((music: MusicType, index: number) => (
+        {musicList.map((music: MusicType) => (
           <TilePlayer
             imageSrc={music.imageSrc}
             src={music.src}
