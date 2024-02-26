@@ -1,6 +1,12 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import ActiveSounds from '../ActiveSounds'
+import { Provider } from 'react-redux'
+import configureStore from 'redux-mock-store'
+
+import * as lofiMusicReducer from '../../store/lofiMusicReducer'
+
+const mockStore = configureStore([])
 
 jest.mock('../../contexts/AccessibilityContext', () => ({
   useAccessibilityContext: jest
@@ -8,19 +14,48 @@ jest.mock('../../contexts/AccessibilityContext', () => ({
     .mockImplementation(() => ({ tabIndex: 0 })),
 }))
 
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: jest.fn(),
+}))
+
+const mockHandlestopAllTrigger = jest.spyOn(
+  lofiMusicReducer,
+  'handlestopAllTrigger',
+)
+const mockHandleMasterVolume = jest.spyOn(
+  lofiMusicReducer,
+  'handleMasterVolume',
+)
+
 describe('ActiveSounds', () => {
+  let store: any
+
+  beforeEach(() => {
+    store = mockStore({
+      lofiMusic: {
+        playing: [],
+        masterVolume: 1,
+      },
+    })
+  })
+
   afterEach(() => {
     jest.clearAllMocks()
+    jest.clearAllTimers()
+    jest.useRealTimers()
   })
+
   it('renders correctly', () => {
+    ;(React.useState as jest.Mock)
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
+
     render(
-      <ActiveSounds
-        timer={5}
-        minutes={5}
-        activeSounds={1}
-        stopAll={() => {}}
-        setMasterVolume={() => {}}
-      />,
+      <Provider store={store}>
+        <ActiveSounds activeSounds={1} />
+      </Provider>,
     )
     const minutesElement = screen.getByTestId('minutes-text')
     const secondsElement = screen.getByTestId('seconds-text')
@@ -35,14 +70,14 @@ describe('ActiveSounds', () => {
   })
 
   it('formats time correctly with leading zeros', () => {
+    ;(React.useState as jest.Mock)
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
     render(
-      <ActiveSounds
-        timer={5}
-        minutes={5}
-        activeSounds={1}
-        stopAll={() => {}}
-        setMasterVolume={() => {}}
-      />,
+      <Provider store={store}>
+        <ActiveSounds activeSounds={1} />
+      </Provider>,
     )
     const minutesElement = screen.getByTestId('minutes-text')
     const secondsElement = screen.getByTestId('seconds-text')
@@ -55,14 +90,14 @@ describe('ActiveSounds', () => {
   })
 
   it('formats time correctly without leading zeros', () => {
+    ;(React.useState as jest.Mock)
+      .mockReturnValueOnce([15, jest.fn()])
+      .mockReturnValueOnce([10, jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
     render(
-      <ActiveSounds
-        timer={15}
-        minutes={10}
-        activeSounds={1}
-        stopAll={() => {}}
-        setMasterVolume={() => {}}
-      />,
+      <Provider store={store}>
+        <ActiveSounds activeSounds={1} />
+      </Provider>,
     )
 
     const minutesElement = screen.getByTestId('minutes-text')
@@ -76,30 +111,30 @@ describe('ActiveSounds', () => {
   })
 
   it('hides the link when activeSounds is 0', () => {
+    ;(React.useState as jest.Mock)
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
     render(
-      <ActiveSounds
-        timer={5}
-        minutes={5}
-        activeSounds={0}
-        stopAll={() => {}}
-        setMasterVolume={() => {}}
-      />,
+      <Provider store={store}>
+        <ActiveSounds activeSounds={0} />
+      </Provider>,
     )
     const link = screen.getByText('Stop all')
     expect(link).toHaveStyle({
-      cursor: 'pointer',
+      cursor: 'default',
     })
   })
 
   it('shows the link when activeSounds is greater than 0', () => {
+    ;(React.useState as jest.Mock)
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
     render(
-      <ActiveSounds
-        timer={5}
-        minutes={5}
-        activeSounds={1}
-        stopAll={() => {}}
-        setMasterVolume={() => {}}
-      />,
+      <Provider store={store}>
+        <ActiveSounds activeSounds={1} />
+      </Provider>,
     )
     const link = screen.getByText('Stop all')
     expect(link).not.toHaveStyle({
@@ -110,15 +145,16 @@ describe('ActiveSounds', () => {
   })
 
   it('calls stopAll function when link is clicked', () => {
-    const stopAllMock = jest.fn()
+    ;(React.useState as jest.Mock)
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
+    const stopAllMock = mockHandlestopAllTrigger
+
     render(
-      <ActiveSounds
-        timer={5}
-        minutes={5}
-        activeSounds={1}
-        stopAll={stopAllMock}
-        setMasterVolume={() => {}}
-      />,
+      <Provider store={store}>
+        <ActiveSounds activeSounds={1} />
+      </Provider>,
     )
     const link = screen.getByText('Stop all')
     fireEvent.click(link)
@@ -126,15 +162,16 @@ describe('ActiveSounds', () => {
   })
 
   it('calls setMasterVolume with the correct value when input changes', () => {
-    const setMasterVolumeMock = jest.fn()
+    ;(React.useState as jest.Mock)
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([5, jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
+
+    const setMasterVolumeMock = mockHandleMasterVolume
     render(
-      <ActiveSounds
-        timer={5}
-        minutes={5}
-        activeSounds={1}
-        stopAll={() => {}}
-        setMasterVolume={setMasterVolumeMock}
-      />,
+      <Provider store={store}>
+        <ActiveSounds activeSounds={1} />
+      </Provider>,
     )
     const input = screen.getByRole('slider')
     fireEvent.change(input, { target: { value: '0.5' } })

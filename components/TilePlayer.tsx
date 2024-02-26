@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
@@ -14,13 +14,15 @@ import { ReactPlayerProps } from 'react-player'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import './ActiveSounds'
 
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import { handleTogglePlay } from '../store/lofiMusicReducer'
+
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 interface TilePlayerProps {
   src: string
   imageSrc: string
-  incrementActiveSounds: (value: boolean) => void
-  stopAllTrigger: number
   isPlaying: boolean
   masterVolume: number
 }
@@ -35,31 +37,18 @@ interface ProgressState {
 export const TilePlayer = ({
   src,
   imageSrc,
-  incrementActiveSounds,
-  stopAllTrigger,
   isPlaying,
   masterVolume,
 }: TilePlayerProps) => {
-  const [playing, setPlaying] = useState(false)
   const [volume, setVolume] = useState(1)
   const [progress, setProgress] = useState(0)
   const { tabIndex } = useAccessibilityContext()
   const playerRef = useRef<ReactPlayerProps>(null)
 
-  useEffect(() => {
-    setPlaying(false)
-  }, [stopAllTrigger])
-
-  useEffect(() => {
-    isPlaying ? setPlaying(true) : setPlaying(false)
-  }, [isPlaying])
-
-  useEffect(() => {
-    incrementActiveSounds(playing)
-  }, [playing])
+  const dispatch = useDispatch<AppDispatch>()
 
   const togglePlay = () => {
-    setPlaying((prevPlaying) => !prevPlaying)
+    dispatch(handleTogglePlay(src))
   }
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +70,7 @@ export const TilePlayer = ({
   return (
     <AudioPlayer>
       <ImageContainer
-        $status={playing}
+        $status={isPlaying}
         onClick={togglePlay}
         onKeyDown={(e: React.KeyboardEvent) => {
           if (e.key == ' ' || e.key == 'Return' || e.key == 'Enter') {
@@ -95,7 +84,7 @@ export const TilePlayer = ({
         <ReactPlayer
           ref={playerRef}
           url={src}
-          playing={playing}
+          playing={isPlaying}
           loop
           volume={volume * masterVolume}
           width={0}

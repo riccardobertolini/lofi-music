@@ -13,6 +13,9 @@ import IconButton from './IconButton'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import { MuiVariants } from '../constants/colors'
 import { musicList } from '../data/musicList'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import { handleSetMusic } from '../store/lofiMusicReducer'
 
 interface MoodOptions {
   name: string
@@ -31,18 +34,15 @@ const moodOptions: MoodOptions[] = [
   {
     name: 'Summer camping',
     sources: ['/audio/forest_sounds.mp3', '/audio/campfire-crackling.mp3'],
-  },
+  }
 ]
 
-const MoodModal = ({
-  setRandomTracks,
-}: {
-  setRandomTracks: (value: number[]) => void
-}) => {
+const MoodModal = () => {
   const { setModalVisible } = useAccessibilityContext()
   const ModalRef = useRef(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
+  const dispatch = useDispatch<AppDispatch>()
   const openModal = (): void => {
     setIsOpen(true)
     setModalVisible(true)
@@ -68,14 +68,14 @@ const MoodModal = ({
   }, [])
 
   const handleMoodChange = (sources: string[]): void => {
-    const uniqueArray: number[] = []
+    const uniqueArray: string[] = []
     sources.forEach((source) => {
       musicList.forEach(
-        (musicListItem, index) =>
-          source === musicListItem.src && uniqueArray.push(index),
+        (musicListItem) =>
+          source === musicListItem.src && uniqueArray.push(musicListItem.src),
       )
     })
-    uniqueArray.length > 0 && setRandomTracks(uniqueArray)
+    uniqueArray.length > 0 && dispatch(handleSetMusic(uniqueArray))
   }
 
   return (

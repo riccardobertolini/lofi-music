@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import {
   ControlBar,
@@ -9,28 +9,56 @@ import {
   VolumeControl,
   ControllerWrapper,
 } from './ActiveSounds.style'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import {
+  handlestopAllTrigger,
+  handleMasterVolume,
+} from '../store/lofiMusicReducer'
 
 interface ActiveSoundsProps {
-  timer: number
-  minutes: number
   activeSounds: number
-  stopAll: (event: MouseEvent<HTMLButtonElement>) => void
-  setMasterVolume: Function
 }
 
-const ActiveSounds: FC<ActiveSoundsProps> = ({
-  timer,
-  minutes,
-  activeSounds,
-  stopAll,
-  setMasterVolume,
-}) => {
+const ActiveSounds: FC<ActiveSoundsProps> = ({ activeSounds }) => {
   let displayValue = activeSounds ? 'block' : 'none'
   const { tabIndex } = useAccessibilityContext()
-
+  const dispatch = useDispatch<AppDispatch>()
   const handleMasterVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMasterVolume = parseFloat(e.target.value)
-    setMasterVolume(newMasterVolume)
+    dispatch(handleMasterVolume(newMasterVolume))
+  }
+
+  const [timer, setTimer] = useState(0)
+  const [minutes, setMinutes] = useState(0)
+  const [isTimerRunning, setIsTimerRunning] = useState(false)
+
+  useEffect(() => {
+    if (activeSounds > 0 && !isTimerRunning) {
+      setIsTimerRunning(true)
+      setTimer(0)
+      setMinutes(0)
+    } else if (activeSounds === 0 && isTimerRunning) {
+      setIsTimerRunning(false)
+    }
+  }, [activeSounds, isTimerRunning])
+
+  useEffect(() => {
+    let interval: NodeJS.Timer
+    if (isTimerRunning) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1)
+      }, 1000)
+    }
+
+    return () => {
+      clearInterval(interval as unknown as number)
+    }
+  }, [isTimerRunning])
+
+  if (timer == 60) {
+    setMinutes(minutes + 1)
+    setTimer(0)
   }
 
   return (
@@ -46,7 +74,10 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({
           </span>
         </TimerText>
         <SoundsActiveText>Sounds active: {activeSounds}</SoundsActiveText>
-        <StopAllButton onClick={stopAll} tabIndex={tabIndex}>
+        <StopAllButton
+          onClick={() => dispatch(handlestopAllTrigger())}
+          tabIndex={tabIndex}
+        >
           Stop all
         </StopAllButton>
       </ControllerWrapper>
