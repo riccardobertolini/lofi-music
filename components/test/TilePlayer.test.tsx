@@ -1,6 +1,6 @@
-import React, { useState as useStateMock } from 'react'
+import React from 'react'
 import { render, fireEvent, act, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { store } from '../../store'
 import { TilePlayer } from '../TilePlayer'
 import { AccessibilityContextProvider } from '../../contexts/AccessibilityContext'

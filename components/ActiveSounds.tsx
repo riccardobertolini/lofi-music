@@ -52,7 +52,7 @@ const ActiveSounds: FC<ActiveSoundsProps> = ({ activeSounds }) => {
     }
 
     return () => {
-      clearInterval(interval)
+      clearInterval(interval as unknown as number)
     }
   }, [isTimerRunning])
 
