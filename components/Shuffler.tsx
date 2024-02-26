@@ -23,7 +23,7 @@ const Shuffler = ({ totalTracks }: { totalTracks: number }) => {
     const selectedIndexs = newArr.slice(0, num)
 
     const newList = musicList
-      .filter((item, index) => selectedIndexs.includes(index))
+      .filter((_, index) => selectedIndexs.includes(index))
       .map((item) => item.src)
     dispatch(handleSetMusic(newList))
 
