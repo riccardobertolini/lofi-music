@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { SettingsOutlined } from '@mui/icons-material'
+import { SettingsOutlined, DarkMode, DarkModeOutlined } from '@mui/icons-material'
 import {
   Container,
   CloseButton,
@@ -11,48 +11,57 @@ import {
 } from './SettingModal.style'
 import IconButton from './IconButton'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
-import { MuiVariants } from '../constants/colors'
+import { ColorCodes, MuiVariants } from '../constants/colors'
+import { ColorSet, DarkModeUtils } from '../utils/DarkModeUtils';
 
-interface Color {
-  name: string
-  gradient: string
-  fallback: string
+
+class ColorTheme {
+  public name: string;
+  private _gradientType: number;
+  private _colorSet: ColorSet;
+
+  constructor(name: string, gradientType: number, colorSet: ColorSet) {
+    this.name = name,
+    this._gradientType = gradientType;
+    this._colorSet = colorSet
+  }
+
+  //linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% );
+  public get gradient(): string {
+    switch (this._gradientType) {
+      case 1:
+        return `linear-gradient( -50deg, #000 0%, ${this._colorSet.secondary} 55%, ${this._colorSet.primary} 66%, ${this._colorSet.secondary} 76%, #000 100% )`;
+      case 2:
+        return `linear-gradient(to right, ${this._colorSet.primary}, ${this._colorSet.secondary})`;
+      case 3:
+        return `linear-gradient(to right, ${this._colorSet.accent}, ${this._colorSet.secondary}, ${this._colorSet.primary})`;
+      case 4:
+        return `linear-gradient(to right, ${this._colorSet.secondary}, ${this._colorSet.primary})`;
+      default:
+        return `linear-gradient(to right, ${this._colorSet.accent}, ${this._colorSet.secondary}, ${this._colorSet.primary})`; 
+    }
+  }
+
+  public get fallback(): string {
+    return this._colorSet.primary;
+  }
 }
-//linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% );
-const colors: Color[] = [
-  {
-    name: 'purple-pink',
-    gradient:
-      'linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% )',
-    fallback: '#ff1361',
-  },
-  {
-    name: 'cool blue',
-    gradient: 'linear-gradient(to right, #2193b0, #6dd5ed)',
-    fallback: '#2193b0',
-  },
-  {
-    name: 'moonlight forest',
-    gradient: 'linear-gradient(to right, #2C5364, #203A43, #0F2027)',
-    fallback: '#0F2027',
-  },
-  {
-    name: 'serenity',
-    gradient: 'linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b)',
-    fallback: '#aa4b6b',
-  },
-  {
-    name: 'Sahara sky',
-    gradient: 'linear-gradient(to right, #f4791f, #659999)',
-    fallback: '#659999',
-  },
-]
+
+const themes: ColorTheme[] = [
+  new ColorTheme("purple-pink", 1, new ColorSet("#ff1361", "#44107a")),
+  new ColorTheme("cool blue", 2, new ColorSet("#2193b0", "#6dd5ed")),
+  new ColorTheme("moonlight forest", 3, new ColorSet("#2C5364", "#203A43", "#0F2027")),
+  new ColorTheme("serenity", 3, new ColorSet("#3b8d99", "#6b6b83", "#aa4b6b")),
+  new ColorTheme("sahara sky", 4, new ColorSet("#659999", "#f4791f"))
+];
+
+let currentTheme: ColorTheme = themes[0];
 
 const SettingModal = () => {
   const { setModalVisible } = useAccessibilityContext()
   const ModalRef = useRef(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [selectedColor, setSelectedColor] = useState<Color>()
+  const [selectedTheme, setSelectedTheme] = useState<ColorTheme>()
 
   const openModal = (): void => {
     setIsOpen(true)
@@ -79,17 +88,51 @@ const SettingModal = () => {
   }, [])
 
   useEffect(() => {
-    if (selectedColor) {
-      document.documentElement.style.backgroundColor = selectedColor.fallback
-      document.documentElement.style.backgroundImage = selectedColor.gradient
+    if (selectedTheme) {
+      document.documentElement.style.backgroundColor = selectedTheme.fallback
+      document.documentElement.style.backgroundImage = selectedTheme.gradient
     } else {
-      setSelectedColor(colors[0])
+      setSelectedTheme(themes[0])
     }
-  }, [selectedColor])
+  }, [selectedTheme])
 
-  const handleColorChange = (color: Color) => {
-    setSelectedColor(color)
+  const handleThemeChange = (theme: ColorTheme) => {
+    currentTheme = theme;
+    setSelectedTheme(theme)
   }
+
+  const flipToOppositeTheme = () => {
+    DarkModeUtils.switchMode();
+    handleThemeChange(currentTheme);
+  }
+
+  const darkModeButtonIcon = () => {
+    if (DarkModeUtils.darkMode) {
+      return  <DarkMode
+              onClick={flipToOppositeTheme}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key == ' ' || e.key == 'Enter' || e.key == 'Return') {
+                  flipToOppositeTheme()
+                }
+              }}
+              tabIndex={1}
+              aria-label="switch mode"
+              sx={{ fontSize: '24px', color: ColorCodes.BLACK, float: 'left' }}
+              />
+    } else {
+      return  <DarkModeOutlined
+              onClick={flipToOppositeTheme}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key == ' ' || e.key == 'Enter' || e.key == 'Return') {
+                  flipToOppositeTheme
+                }
+              }}
+              tabIndex={1}
+              aria-label="switch mode"
+              sx={{ fontSize: '24px', color: ColorCodes.BLACK, float: 'left' }}
+              />
+    }
+  };
 
   return (
     <Container>
@@ -118,7 +161,7 @@ const SettingModal = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke={selectedColor?.fallback || '#000'}
+                stroke={selectedTheme?.fallback || '#000'}
                 className="w-6 h-6"
               >
                 <path
@@ -128,31 +171,34 @@ const SettingModal = () => {
                 />
               </svg>
             </CloseButton>
+            <div>
+              {darkModeButtonIcon()}
+            </div>
             <BackgroundColorWidget>
               <p>Update the background colors:</p>
               <ColorPickerWrapper>
-                {colors.map((color, index) => (
+                {themes.map((theme, index) => (
                   <ColorOption
                     key={index}
-                    onClick={() => handleColorChange(color)}
+                    onClick={() => handleThemeChange(theme)}
                     onKeyDown={(e: React.KeyboardEvent) => {
                       if (
                         e.key == ' ' ||
                         e.key == 'Return' ||
                         e.key == 'Enter'
                       ) {
-                        handleColorChange(color)
+                        handleThemeChange(theme)
                       }
                     }}
                     tabIndex={0}
-                    aria-label={color.name + ' as background'}
-                    background={color.gradient}
+                    aria-label={theme.name + ' as background'}
+                    background={theme.gradient}
                     insideback={
-                      color === selectedColor ? 'transparent' : 'white'
+                      theme === selectedTheme ? 'transparent' : 'white'
                     }
-                    textcolor={color === selectedColor ? 'white' : 'black'}
+                    textcolor={theme === selectedTheme ? 'white' : 'black'}
                   >
-                    <div>{color.name}</div>
+                    <div>{theme.name}</div>
                   </ColorOption>
                 ))}
               </ColorPickerWrapper>
