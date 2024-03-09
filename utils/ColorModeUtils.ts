@@ -90,7 +90,7 @@ export class ColorSet {
     }
 
     public get primary(): string {
-        const hslColor = ColorModeUtils.HexToHSL(this._primary);
+        const hslColor = ColorModeUtils.HexToHSL(ColorModeUtils.darkMode ? this._accent : this._primary);
         hslColor.lightness = ColorModeUtils.darkMode ? 7 : hslColor.lightness;
         return ColorModeUtils.HSLToHex(hslColor);
     }
@@ -102,8 +102,8 @@ export class ColorSet {
     }
 
     public get accent(): string {
-        const hslColor = ColorModeUtils.HexToHSL(this._accent);
-        hslColor.lightness = ColorModeUtils.darkMode ? 28 : hslColor.lightness;
+        const hslColor = ColorModeUtils.HexToHSL(ColorModeUtils.darkMode ? this._primary : this._accent);
+        hslColor.lightness = ColorModeUtils.darkMode ? 40 : hslColor.lightness;
         return ColorModeUtils.HSLToHex(hslColor);
     }
 }
