@@ -12,7 +12,7 @@ import {
 import IconButton from './IconButton'
 import { useAccessibilityContext } from '../contexts/AccessibilityContext'
 import { ColorCodes, MuiVariants } from '../constants/colors'
-import { ColorSet, DarkModeUtils } from '../utils/DarkModeUtils';
+import { ColorSet, ColorModeUtils } from '../utils/ColorModeUtils';
 
 
 class ColorTheme {
@@ -30,7 +30,8 @@ class ColorTheme {
   public get gradient(): string {
     switch (this._gradientType) {
       case 0:
-        return `linear-gradient( -50deg, ${DarkModeUtils.darkMode ? '#4d4d4d' : '#000'} 0%, ${this._colorSet.secondary} 55%, ${this._colorSet.primary} 66%, ${this._colorSet.secondary} 76%, ${DarkModeUtils.darkMode ? '#4d4d4d' : '#000'}  100% )`;
+        return `linear-gradient( -50deg, ${ColorModeUtils.darkMode ? '#4d4d4d' : '#000'} 0%, ${this._colorSet.secondary} 55%, 
+        ${this._colorSet.primary} 66%, ${this._colorSet.secondary} 76%, ${ColorModeUtils.darkMode ? '#4d4d4d' : '#000'}  100% )`;
       case 1:
         return `linear-gradient(to right, ${this._colorSet.primary}, ${this._colorSet.secondary})`;
       case 2:
@@ -38,7 +39,7 @@ class ColorTheme {
       case 3:
         return `linear-gradient(to right, ${this._colorSet.secondary}, ${this._colorSet.primary})`;
       default:
-        return `linear-gradient(to right, ${this._colorSet.accent}, ${this._colorSet.secondary}, ${this._colorSet.primary})`; 
+        return `linear-gradient(to right, ${this._colorSet.secondary}, ${this._colorSet.primary})`;
     }
   }
 
@@ -103,12 +104,12 @@ const SettingModal = () => {
   }
 
   const flipToOppositeTheme = () => {
-    DarkModeUtils.switchMode();
+    ColorModeUtils.switchMode();
     handleThemeChange(Object.assign(new ColorTheme(), selectedTheme));
   }
 
   const darkModeButtonIcon = () => {
-    if (DarkModeUtils.darkMode) {
+    if (ColorModeUtils.darkMode) {
       return  <DarkMode
               onClick={flipToOppositeTheme}
               onKeyDown={(e: React.KeyboardEvent) => {

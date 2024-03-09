@@ -1,8 +1,8 @@
-export class DarkModeUtils {
+export class ColorModeUtils {
     public static darkMode: boolean;
 
     public static switchMode(): void {
-        DarkModeUtils.darkMode = !DarkModeUtils.darkMode;
+        ColorModeUtils.darkMode = !ColorModeUtils.darkMode;
     }
 
     public static HSLToHex(hsl: HSLColor): string {
@@ -90,22 +90,22 @@ export class ColorSet {
     }
 
     public get primary(): string {
-        const hslColor = DarkModeUtils.HexToHSL(this._primary);
-        hslColor.lightness = DarkModeUtils.darkMode ? 7 : hslColor.lightness;
-        return DarkModeUtils.HSLToHex(hslColor);
+        const hslColor = ColorModeUtils.HexToHSL(this._primary);
+        hslColor.lightness = ColorModeUtils.darkMode ? 7 : hslColor.lightness;
+        return ColorModeUtils.HSLToHex(hslColor);
     }
 
     public get secondary(): string {
-        const hslColor = DarkModeUtils.HexToHSL(this._secondary);
-        hslColor.lightness = DarkModeUtils.darkMode ? 14 : hslColor.lightness;
-        return DarkModeUtils.HSLToHex(hslColor);
+        const hslColor = ColorModeUtils.HexToHSL(this._secondary);
+        hslColor.lightness = ColorModeUtils.darkMode ? 14 : hslColor.lightness;
+        return ColorModeUtils.HSLToHex(hslColor);
     }
 
     public get accent(): string {
-        const hslColor = DarkModeUtils.HexToHSL(this._accent);
-        hslColor.lightness = DarkModeUtils.darkMode ? 28 : hslColor.lightness;
-        return DarkModeUtils.HSLToHex(hslColor);
+        const hslColor = ColorModeUtils.HexToHSL(this._accent);
+        hslColor.lightness = ColorModeUtils.darkMode ? 28 : hslColor.lightness;
+        return ColorModeUtils.HSLToHex(hslColor);
     }
 }
 
-export default DarkModeUtils
+export default ColorModeUtils
