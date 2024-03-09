@@ -20,22 +20,22 @@ class ColorTheme {
   private _gradientType: number;
   private _colorSet: ColorSet;
 
-  constructor(name: string, gradientType: number, colorSet: ColorSet) {
-    this.name = name,
+  constructor(name: string = "", gradientType: number = 0, colorSet?: ColorSet) {
+    this.name = name;
     this._gradientType = gradientType;
-    this._colorSet = colorSet
+    this._colorSet = colorSet || new ColorSet("#000", "#000");
   }
 
   //linear-gradient( -50deg, #000 0%, #44107a 55%, #ff1361 66%, #44107a 76%, #000 100% );
   public get gradient(): string {
     switch (this._gradientType) {
+      case 0:
+        return `linear-gradient( -50deg, ${DarkModeUtils.darkMode ? '#4d4d4d' : '#000'} 0%, ${this._colorSet.secondary} 55%, ${this._colorSet.primary} 66%, ${this._colorSet.secondary} 76%, ${DarkModeUtils.darkMode ? '#4d4d4d' : '#000'}  100% )`;
       case 1:
-        return `linear-gradient( -50deg, #000 0%, ${this._colorSet.secondary} 55%, ${this._colorSet.primary} 66%, ${this._colorSet.secondary} 76%, #000 100% )`;
-      case 2:
         return `linear-gradient(to right, ${this._colorSet.primary}, ${this._colorSet.secondary})`;
-      case 3:
+      case 2:
         return `linear-gradient(to right, ${this._colorSet.accent}, ${this._colorSet.secondary}, ${this._colorSet.primary})`;
-      case 4:
+      case 3:
         return `linear-gradient(to right, ${this._colorSet.secondary}, ${this._colorSet.primary})`;
       default:
         return `linear-gradient(to right, ${this._colorSet.accent}, ${this._colorSet.secondary}, ${this._colorSet.primary})`; 
@@ -45,17 +45,19 @@ class ColorTheme {
   public get fallback(): string {
     return this._colorSet.primary;
   }
+
+  public equals(comparison?: ColorTheme) {
+    return !!comparison && this.name === comparison.name;
+  }
 }
 
 const themes: ColorTheme[] = [
-  new ColorTheme("purple-pink", 1, new ColorSet("#ff1361", "#44107a")),
-  new ColorTheme("cool blue", 2, new ColorSet("#2193b0", "#6dd5ed")),
-  new ColorTheme("moonlight forest", 3, new ColorSet("#2C5364", "#203A43", "#0F2027")),
-  new ColorTheme("serenity", 3, new ColorSet("#3b8d99", "#6b6b83", "#aa4b6b")),
-  new ColorTheme("sahara sky", 4, new ColorSet("#659999", "#f4791f"))
+  new ColorTheme("purple-pink", 0, new ColorSet("#ff1361", "#44107a")),
+  new ColorTheme("cool blue", 1, new ColorSet("#2193b0", "#6dd5ed")),
+  new ColorTheme("moonlight forest", 2, new ColorSet("#2C5364", "#203A43", "#0F2027")),
+  new ColorTheme("serenity", 2, new ColorSet("#3b8d99", "#6b6b83", "#aa4b6b")),
+  new ColorTheme("sahara sky", 3, new ColorSet("#659999", "#f4791f"))
 ];
-
-let currentTheme: ColorTheme = themes[0];
 
 const SettingModal = () => {
   const { setModalVisible } = useAccessibilityContext()
@@ -96,14 +98,13 @@ const SettingModal = () => {
     }
   }, [selectedTheme])
 
-  const handleThemeChange = (theme: ColorTheme) => {
-    currentTheme = theme;
-    setSelectedTheme(theme)
+  const handleThemeChange = (theme?: ColorTheme) => {
+    setSelectedTheme(theme);
   }
 
   const flipToOppositeTheme = () => {
     DarkModeUtils.switchMode();
-    handleThemeChange(currentTheme);
+    handleThemeChange(Object.assign(new ColorTheme(), selectedTheme));
   }
 
   const darkModeButtonIcon = () => {
@@ -117,19 +118,19 @@ const SettingModal = () => {
               }}
               tabIndex={1}
               aria-label="switch mode"
-              sx={{ fontSize: '24px', color: ColorCodes.BLACK, float: 'left' }}
+              sx={{ fontSize: '36px', color: ColorCodes.BLACK, float: 'left', cursor: 'pointer' }}
               />
     } else {
       return  <DarkModeOutlined
               onClick={flipToOppositeTheme}
               onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.key == ' ' || e.key == 'Enter' || e.key == 'Return') {
-                  flipToOppositeTheme
+                  flipToOppositeTheme()
                 }
               }}
               tabIndex={1}
               aria-label="switch mode"
-              sx={{ fontSize: '24px', color: ColorCodes.BLACK, float: 'left' }}
+              sx={{ fontSize: '36px', color: ColorCodes.BLACK, float: 'left', cursor: 'pointer' }}
               />
     }
   };
@@ -194,9 +195,9 @@ const SettingModal = () => {
                     aria-label={theme.name + ' as background'}
                     background={theme.gradient}
                     insideback={
-                      theme === selectedTheme ? 'transparent' : 'white'
+                      theme.equals(selectedTheme) ? 'transparent' : 'white'
                     }
-                    textcolor={theme === selectedTheme ? 'white' : 'black'}
+                    textcolor={theme.equals(selectedTheme) ? 'white' : 'black'}
                   >
                     <div>{theme.name}</div>
                   </ColorOption>

@@ -103,7 +103,7 @@ export class ColorSet {
 
     public get accent(): string {
         const hslColor = DarkModeUtils.HexToHSL(this._accent);
-        hslColor.lightness = DarkModeUtils.darkMode ? 80 : 10;
+        hslColor.lightness = DarkModeUtils.darkMode ? 28 : 10;
         return DarkModeUtils.HSLToHex(hslColor);
     }
 }
