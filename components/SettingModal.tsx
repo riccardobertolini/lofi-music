@@ -54,8 +54,8 @@ class ColorTheme {
 const themes: ColorTheme[] = [
   new ColorTheme("purple-pink", 0, new ColorSet("#ff1361", "#44107a")),
   new ColorTheme("cool blue", 1, new ColorSet("#2193b0", "#6dd5ed")),
-  new ColorTheme("moonlight forest", 2, new ColorSet("#2C5364", "#203A43", "#0F2027")),
-  new ColorTheme("serenity", 2, new ColorSet("#3b8d99", "#6b6b83", "#aa4b6b")),
+  new ColorTheme("moonlight forest", 2, new ColorSet("#0F2027", "#203A43", "#2C5364")),
+  new ColorTheme("serenity", 2, new ColorSet("#aa4b6b", "#6b6b83", "#3b8d99")),
   new ColorTheme("sahara sky", 3, new ColorSet("#659999", "#f4791f"))
 ];
 

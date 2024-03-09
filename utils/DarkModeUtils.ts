@@ -91,19 +91,19 @@ export class ColorSet {
 
     public get primary(): string {
         const hslColor = DarkModeUtils.HexToHSL(this._primary);
-        hslColor.lightness = DarkModeUtils.darkMode ? 7 : 54;
+        hslColor.lightness = DarkModeUtils.darkMode ? 7 : hslColor.lightness;
         return DarkModeUtils.HSLToHex(hslColor);
     }
 
     public get secondary(): string {
         const hslColor = DarkModeUtils.HexToHSL(this._secondary);
-        hslColor.lightness = DarkModeUtils.darkMode ? 14 : 27;
+        hslColor.lightness = DarkModeUtils.darkMode ? 14 : hslColor.lightness;
         return DarkModeUtils.HSLToHex(hslColor);
     }
 
     public get accent(): string {
         const hslColor = DarkModeUtils.HexToHSL(this._accent);
-        hslColor.lightness = DarkModeUtils.darkMode ? 28 : 10;
+        hslColor.lightness = DarkModeUtils.darkMode ? 28 : hslColor.lightness;
         return DarkModeUtils.HSLToHex(hslColor);
     }
 }
