@@ -82,15 +82,6 @@ const SettingModal = () => {
       setModalVisible(false)
     }
   }
-
-  useEffect((): (() => void) => {
-    document.addEventListener('mousedown', outsideClick)
-    return () => {
-      document.removeEventListener('mousedown', outsideClick)
-    }
-  }, [])
-
-
   
   useEffect((): (() => void) => {
     const savedUserTheme = localStorage.getItem("user-theme");
@@ -109,6 +100,14 @@ const SettingModal = () => {
       document.removeEventListener('mousedown', outsideClick)
     }
   }, [])
+
+  useEffect(() => {
+    if (selectedTheme) {
+      document.documentElement.style.backgroundColor = selectedTheme.fallback
+      document.documentElement.style.backgroundImage = selectedTheme.gradient
+      localStorage.setItem("user-theme", JSON.stringify(selectedTheme));
+    }
+  }, [selectedTheme])
 
   const handleThemeChange = (theme?: ColorTheme) => {
     setSelectedTheme(theme);
