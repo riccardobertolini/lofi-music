@@ -11,7 +11,7 @@
 
 > A React 18 + NextJS project, created for fun. I was tired of opening YouTube for some lo-fi music while working 🤭.
 
-## ✨ [Click here for a live demo!](https://www.lofimusic.dev/)
+## ✨ [Click here for a live demo!](https://lofi-music-eight.vercel.app/) 
 
 ![alt text][demo-screenshot]
 
