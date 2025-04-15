@@ -109,7 +109,7 @@ const SettingModal = () => {
       document.removeEventListener('mousedown', outsideClick)
     }
   }, [])
-  
+
   const handleThemeChange = (theme?: ColorTheme) => {
     setSelectedTheme(theme);
   }
