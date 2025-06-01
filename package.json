@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.16",
+    "@mui/icons-material": "^7.1.0",
     "@mui/material": "^5.16.7",
     "next": "^14.2.3",
     "path": "0.12.7",
