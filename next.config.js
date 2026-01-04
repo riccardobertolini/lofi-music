@@ -1,6 +1,26 @@
 const path = require('path')
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+
+  // 1. Enable SWC for Emotion and Styled Components (replaces .babelrc)
+  compiler: {
+    styledComponents: true,
+    emotion: true,
+  },
+
+  // 2. Fix the "Deoptimised styling" warning by optimizing MUI imports
+  modularizeImports: {
+    '@mui/icons-material': {
+      transform: '@mui/icons-material/{{member}}',
+    },
+    '@mui/material': {
+      transform: '@mui/material/{{member}}',
+    },
+  },
+
+  // 3. Restore your custom aliases so imports like '@/styles' work again
   webpack: (config) => {
     config.resolve.alias['@/styles'] = path.join(__dirname, 'styles')
     config.resolve.alias['@/components'] = path.join(__dirname, 'components')
@@ -13,3 +33,5 @@ module.exports = {
     return config
   },
 }
+
+module.exports = nextConfig
