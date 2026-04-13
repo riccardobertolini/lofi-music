@@ -82,8 +82,19 @@ const SettingModal = () => {
       setModalVisible(false)
     }
   }
-
+  
   useEffect((): (() => void) => {
+    const savedUserTheme = localStorage.getItem("user-theme");
+
+    if(savedUserTheme) {
+      const parsedUserTheme = JSON.parse(savedUserTheme) as ColorTheme;
+      const matchingTheme = themes.find((theme) => theme.name === parsedUserTheme.name);
+      setSelectedTheme(matchingTheme ?? themes[0]);
+    }
+    else {
+      setSelectedTheme(themes[0])
+    }
+
     document.addEventListener('mousedown', outsideClick)
     return () => {
       document.removeEventListener('mousedown', outsideClick)
@@ -94,8 +105,7 @@ const SettingModal = () => {
     if (selectedTheme) {
       document.documentElement.style.backgroundColor = selectedTheme.fallback
       document.documentElement.style.backgroundImage = selectedTheme.gradient
-    } else {
-      setSelectedTheme(themes[0])
+      localStorage.setItem("user-theme", JSON.stringify(selectedTheme));
     }
   }, [selectedTheme])
 
